@@ -4,7 +4,7 @@
 
 A high-performance, premium corporate website for **GGIT Systems**, featuring a modern "Deep Tech" aesthetic, advanced smooth scrolling, and immersive 3D elements.
 
-![Project Preview](assets/preview.png)
+![Project Preview](assets/placeholder.png)
 
 ## 🚀 Key Features
 
