@@ -1,5 +1,5 @@
 import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, RoundedBox, Text, Line } from "@react-three/drei";
 import * as THREE from "three";
 
@@ -243,6 +243,7 @@ function CubeFace({
 
 function CubeGeometry() {
   const groupRef = useRef<THREE.Group>(null);
+  const { viewport } = useThree();
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -251,11 +252,18 @@ function CubeGeometry() {
     }
   });
 
+  // Responsive scaling logic
+  const scale = useMemo(() => {
+    // If viewport width is small (mobile), scale down to fit.
+    // 3.5 is a threshold roughly ensuring the cube (size ~2.5-3 diagonal) fits with margin.
+    return Math.min(1, viewport.width / 3.5);
+  }, [viewport.width]);
+
   const faceOffset = 1.001;
 
   return (
     <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.4}>
-      <group ref={groupRef}>
+      <group ref={groupRef} scale={scale}>
         {/* Main cube body */}
         <RoundedBox args={[2, 2, 2]} radius={0.15} smoothness={4}>
           <meshStandardMaterial
