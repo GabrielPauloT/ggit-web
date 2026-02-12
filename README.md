@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GGIT Systems | Digital Solutions
 
-## Getting Started
+> **Engineering the future of digital business.**
 
-First, run the development server:
+A high-performance, premium corporate website for **GGIT Systems**, featuring a modern "Deep Tech" aesthetic, advanced smooth scrolling, and immersive 3D elements.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Project Preview](https://github.com/GabrielPauloT/ggit-web/assets/placeholder.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Premium UX/UI:** "Deep Tech" design language with glassmorphism, glowing accents, and electric blue tones.
+*   **Physics-Based Smooth Scroll:** Custom implementation using **Lenis** with dynamic duration (slower for long distances) and quartic easing for a luxurious feel.
+*   **3D Elements:** Interactive 3D cubes and backgrounds using **React Three Fiber**.
+*   **Performance First:** Built on **Next.js 16 (App Router)** and **Turbopack** for lightning-fast navigation.
+*   **Responsive:** Fully adaptive layout for mobile, tablet, and desktop.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+*   **Framework:** [Next.js 16](https://nextjs.org/)
+*   **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+*   **Animations:** [Framer Motion](https://www.framer.com/motion/)
+*   **3D Graphics:** [Three.js](https://threejs.org/) / [React Three Fiber](https://docs.pmnd.rs/react-three-fiber)
+*   **Smooth Scroll:** [Lenis](https://github.com/darkroomengineering/lenis)
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Getting Started
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/GabrielPauloT/ggit-web.git
+    cd ggit-web
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Open:** [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 Design Philosophy
+
+*   **Color Palette:** Standard Dark Mode (`#0a0a0a`) with Electric Blue (`#2563eb`) and Cyan Glow (`#06b6d4`) accents.
+*   **Typography:** Inter (Sans) + JetBrains Mono (Technical/Code).
+*   **Motion:** Deliberate, smooth transitions. No instant jumps.
+
+---
+
+© 2026 GGIT Systems. All rights reserved.
