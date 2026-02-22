@@ -18,6 +18,8 @@ export const metadata: Metadata = {
   description: 'Turning complex challenges into scalable digital solutions.',
 }
 
+import ReturnToTop from '@/components/ui/ReturnToTop'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +30,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-dark-bg text-foreground min-h-screen relative`}>
         <SmoothScrolling>
           {children}
+          <ReturnToTop />
         </SmoothScrolling>
       </body>
     </html>

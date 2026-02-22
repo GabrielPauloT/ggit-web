@@ -3,7 +3,9 @@ import { Github, Linkedin, Mail, MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-[#050505] border-t border-white/10 pt-20 pb-8 text-white">
+    <footer id="contact" className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 pt-20 pb-8 text-white overflow-hidden">
+      {/* Decorative subtle glow at bottom */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[150px] bg-brand-blue/[0.03] rounded-full blur-[80px] pointer-events-none" />
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">

@@ -13,7 +13,7 @@ const getCategoryIcon = (category: string) => {
 
 export default function Portfolio() {
   return (
-    <section id="projects" className="py-24 bg-[#0a0a0a] relative overflow-hidden">
+    <section id="projects" className="py-32 relative overflow-hidden backdrop-blur-sm">
       {/* Background Decorations */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" />
@@ -29,7 +29,9 @@ export default function Portfolio() {
             <span className="w-10 h-[1px] bg-brand-cyan" />
             <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Selected Works</h2>
           </div>
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">Digital Excellence<span className="text-brand-blue">.</span></h3>
+          <h3 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+            Digital Excellence<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
+          </h3>
           <p className="text-gray-400 max-w-2xl">
             We build systems that scale. From Industrial IoT to Consumer Apps, our engineering drives real business impact.
           </p>
@@ -43,12 +45,15 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group relative bg-[#111] border border-white/5 rounded-2xl overflow-hidden hover:border-brand-blue/50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(37,99,235,0.15)] flex flex-col"
+              className="group relative cursor-pointer bg-white/[0.02] border border-white/[0.05] rounded-3xl overflow-hidden hover:border-brand-blue/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(37,99,235,0.2)] hover:bg-white/[0.04] flex flex-col"
             >
+              {/* Optional glow effect behind card */}
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
               {/* Card Header / Icon */}
-              <div className="h-48 bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] group-hover:from-[#202020] group-hover:to-[#151515] transition-colors relative flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10" />
-                <div className="p-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 group-hover:scale-110 transition-transform duration-500">
+              <div className="h-56 bg-gradient-to-br from-white/[0.02] to-transparent group-hover:from-brand-blue/[0.08] transition-colors duration-500 relative flex items-center justify-center overflow-hidden border-b border-white/[0.05]">
+                <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+                <div className="p-5 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/10 group-hover:scale-110 group-hover:border-brand-blue/40 transition-all duration-500 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                     {getCategoryIcon(project.category)}
                 </div>
               </div>
@@ -62,7 +67,7 @@ export default function Portfolio() {
                   <ArrowUpRight className="text-gray-500 group-hover:text-brand-blue group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" size={20} />
                 </div>
 
-                <h4 className="text-xl font-bold text-white mb-3 group-hover:text-brand-blue transition-colors leading-tight">
+                <h4 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-cyan transition-colors duration-300 leading-tight">
                   {project.title}
                 </h4>
                 
