@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, RoundedBox, Text, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -142,6 +142,23 @@ function CubeFace({ position, rotation, size, roman, title, children }: {
   );
 }
 
+function ContextLossDetector({ onContextLost }: { onContextLost: () => void }) {
+  const { gl } = useThree();
+  
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const handleContextLost = () => {
+      onContextLost();
+    };
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    return () => {
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
+    };
+  }, [gl, onContextLost]);
+  
+  return null;
+}
+
 function CubeGeometry() {
   const groupRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
@@ -176,7 +193,7 @@ function CubeGeometry() {
   );
 }
 
-export default function ThreeJSCube() {
+export default function ThreeJSCube({ onContextLost }: { onContextLost?: () => void }) {
   return (
     <div className="w-full h-full">
       <Canvas
@@ -188,6 +205,7 @@ export default function ThreeJSCube() {
         <directionalLight position={[5, 5, 5]} intensity={0.8} color="#e0e0ff" />
         <pointLight position={[-5, 3, 5]} intensity={0.4} color="#ffffff" />
         <pointLight position={[0, -5, 0]} intensity={0.2} color="#4a4a6a" />
+        {onContextLost && <ContextLossDetector onContextLost={onContextLost} />}
         <CubeGeometry />
       </Canvas>
     </div>

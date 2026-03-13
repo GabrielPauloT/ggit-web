@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -10,40 +10,52 @@ function checkWebGLSupport(): boolean {
   try {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    return !!gl;
+    if (!gl) return false;
+    if (gl instanceof WebGLRenderingContext) {
+      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+      if (debugInfo) {
+        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+        if (typeof renderer === 'string' && (renderer.includes('SwiftShader') || renderer.includes('llvmpipe'))) {
+          return false;
+        }
+      }
+    }
+    return true;
   } catch {
     return false;
   }
 }
 
-function CSSCubeFallback() {
+export function CSSCubeFallback() {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <motion.div
-        className="relative w-40 h-40 md:w-56 md:h-56"
-        style={{ perspective: '800px' }}
+        className="relative"
+        style={{ perspective: '800px', width: '160px', height: '160px' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <motion.div
-          className="w-full h-full relative"
-          style={{ transformStyle: 'preserve-3d' }}
+          className="relative"
+          style={{ transformStyle: 'preserve-3d', width: '160px', height: '160px' }}
           animate={{ rotateX: [25, 35, 25], rotateY: [0, 360] }}
           transition={{ rotateY: { duration: 20, repeat: Infinity, ease: "linear" }, rotateX: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
         >
           {[
-            { transform: 'translateZ(70px)', label: 'I', title: 'THE CORE' },
-            { transform: 'rotateY(180deg) translateZ(70px)', label: 'II', title: 'THE STRUCTURE' },
-            { transform: 'rotateY(90deg) translateZ(70px)', label: 'III', title: 'THE BACKBONE' },
-            { transform: 'rotateY(-90deg) translateZ(70px)', label: 'IV', title: 'THE SHIELD' },
-            { transform: 'rotateX(90deg) translateZ(70px)', label: 'V', title: 'THE INTELLIGENCE' },
-            { transform: 'rotateX(-90deg) translateZ(70px)', label: 'VI', title: 'THE METHOD' },
+            { transform: 'translateZ(80px)', label: 'I', title: 'THE CORE' },
+            { transform: 'rotateY(180deg) translateZ(80px)', label: 'II', title: 'THE STRUCTURE' },
+            { transform: 'rotateY(90deg) translateZ(80px)', label: 'III', title: 'THE BACKBONE' },
+            { transform: 'rotateY(-90deg) translateZ(80px)', label: 'IV', title: 'THE SHIELD' },
+            { transform: 'rotateX(90deg) translateZ(80px)', label: 'V', title: 'THE INTELLIGENCE' },
+            { transform: 'rotateX(-90deg) translateZ(80px)', label: 'VI', title: 'THE METHOD' },
           ].map((face, i) => (
             <div
               key={i}
-              className="absolute inset-0 w-[140px] h-[140px] md:w-[140px] md:h-[140px] flex flex-col items-center justify-center border border-white/10 bg-[#2a2a35]/80 backdrop-blur-sm rounded-lg"
+              className="absolute flex flex-col items-center justify-center border border-white/10 bg-[#2a2a35]/80 backdrop-blur-sm rounded-lg"
               style={{
+                width: '160px',
+                height: '160px',
                 transform: face.transform,
                 backfaceVisibility: 'hidden',
               }}
@@ -64,14 +76,18 @@ const ThreeJSCube = dynamic(() => import('@/components/3d/ThreeJSCube'), {
   loading: () => <CSSCubeFallback />,
 });
 
-class CubeErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
-  constructor(props: { children: React.ReactNode }) {
+class CubeErrorBoundary extends React.Component<{ children: React.ReactNode; onError: () => void }, { hasError: boolean }> {
+  constructor(props: { children: React.ReactNode; onError: () => void }) {
     super(props);
     this.state = { hasError: false };
   }
 
   static getDerivedStateFromError() {
     return { hasError: true };
+  }
+
+  componentDidCatch() {
+    this.props.onError();
   }
 
   render() {
@@ -83,21 +99,30 @@ class CubeErrorBoundary extends React.Component<{ children: React.ReactNode }, {
 }
 
 export default function InteractiveCube() {
-  const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
+  const [useFallback, setUseFallback] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    setWebglSupported(checkWebGLSupport());
+    const supported = checkWebGLSupport();
+    if (!supported) {
+      setUseFallback(true);
+    }
+    setChecked(true);
   }, []);
 
-  if (webglSupported === null) return null;
+  const handleContextLost = useCallback(() => {
+    setUseFallback(true);
+  }, []);
 
-  if (!webglSupported) {
+  if (!checked) return null;
+
+  if (useFallback) {
     return <CSSCubeFallback />;
   }
 
   return (
-    <CubeErrorBoundary>
-      <ThreeJSCube />
+    <CubeErrorBoundary onError={() => setUseFallback(true)}>
+      <ThreeJSCube onContextLost={handleContextLost} />
     </CubeErrorBoundary>
   );
 }
