@@ -95,3 +95,84 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--electric-blue);
 }
+
+.hero-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0;
+  animation: hero-glow-drift 12s ease-in-out infinite;
+}
+
+.hero-glow-orb-1 {
+  width: 600px;
+  height: 600px;
+  background: rgba(37, 99, 235, 0.08);
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.hero-glow-orb-2 {
+  width: 500px;
+  height: 500px;
+  background: rgba(6, 182, 212, 0.06);
+  bottom: 10%;
+  right: 10%;
+  animation-delay: -4s;
+}
+
+.hero-glow-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: rgba(37, 99, 235, 0.05);
+  top: 50%;
+  left: 50%;
+  animation-name: hero-glow-drift-center;
+  animation-delay: -8s;
+}
+
+@keyframes hero-glow-drift {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translate(30px, -20px) scale(1.1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translate(-20px, 15px) scale(0.95);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translate(15px, 25px) scale(1.05);
+  }
+}
+
+@keyframes hero-glow-drift-center {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  25% {
+    opacity: 0.6;
+    transform: translate(calc(-50% + 30px), calc(-50% - 20px)) scale(1.1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translate(calc(-50% - 20px), calc(-50% + 15px)) scale(0.95);
+  }
+  75% {
+    opacity: 0.7;
+    transform: translate(calc(-50% + 15px), calc(-50% + 25px)) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-glow-orb {
+    animation: none;
+    opacity: 0.4;
+  }
+}

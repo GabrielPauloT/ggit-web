@@ -24,6 +24,12 @@ export default function Hero() {
   }
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-noise">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="hero-glow-orb hero-glow-orb-1" />
+        <div className="hero-glow-orb hero-glow-orb-2" />
+        <div className="hero-glow-orb hero-glow-orb-3" />
+      </div>
+
       <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center">
         <motion.div
           initial="hidden"
@@ -94,8 +100,9 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
+      <motion.button
+        aria-label="Scroll to about section"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer bg-transparent border-none focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue rounded-lg p-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{ delay: 1, duration: 2, repeat: Infinity }}
@@ -105,7 +112,7 @@ export default function Hero() {
           Scroll
           <ChevronDown className="w-5 h-5 text-brand-blue" />
         </div>
-      </motion.div>
+      </motion.button>
     </section>
   )
 }

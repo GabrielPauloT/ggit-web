@@ -1,10 +1,15 @@
 import Link from 'next/link'
 import { Github, Linkedin, Mail, MapPin } from 'lucide-react'
 
+const socialLinks = [
+  { icon: Github, href: 'https://github.com/ggit-systems', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/ggit-systems', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:contact@ggit.com', label: 'Email' },
+]
+
 export default function Footer() {
   return (
     <footer id="contact" className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 pt-20 pb-8 text-white overflow-hidden">
-      {/* Decorative subtle glow at bottom */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[150px] bg-brand-blue/[0.03] rounded-full blur-[80px] pointer-events-none" />
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
@@ -16,10 +21,17 @@ export default function Footer() {
               Your strategic tech partner bridging Australia and Brazil. We validate ideas, build MVPs, and scale when you're ready.
             </p>
             <div className="flex gap-4">
-              {[Github, Linkedin, Mail].map((Icon, i) => (
-                <Link key={i} href="#" className="p-3 bg-white/5 rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 hover:scale-110 border border-white/5 hover:border-brand-blue/50">
+              {socialLinks.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('mailto') ? undefined : '_blank'}
+                  rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                  aria-label={label}
+                  className="p-3 bg-white/5 rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 hover:scale-110 border border-white/5 hover:border-brand-blue/50"
+                >
                   <Icon size={20} />
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -29,7 +41,7 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-400 text-sm">
               {['PoC & MVP Development', 'Custom Software', 'Mobile Development', 'AI & Automation', 'Industrial IoT'].map((item) => (
                 <li key={item}>
-                  <Link href="#" className="hover:text-brand-cyan transition-colors">{item}</Link>
+                  <a href="#services" className="hover:text-brand-cyan transition-colors">{item}</a>
                 </li>
               ))}
             </ul>
@@ -39,7 +51,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-6 tracking-wide text-lg">Contact</h4>
             <ul className="space-y-4 text-gray-400 text-sm">
               <li className="flex items-start gap-4 group">
-                <MapPin size={20} className="text-brand-blue mt-0.5 group-hover:text-brand-cyan transition-colors" />
+                <MapPin size={20} className="text-brand-blue mt-0.5 group-hover:text-brand-cyan transition-colors flex-shrink-0" />
                 <span className="group-hover:text-gray-300 transition-colors">8 A Newton Cres<br/>Melbourne, VIC 3075</span>
               </li>
               <li>
