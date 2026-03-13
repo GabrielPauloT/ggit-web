@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MapPin, Lightbulb, TrendingUp } from 'lucide-react'
+import InteractiveCube from '@/components/3d/InteractiveCube'
 
 const pillars = [
   {
@@ -28,25 +29,41 @@ export default function About() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-brand-cyan/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
-          className="max-w-3xl mx-auto text-center mb-20"
-        >
-          <div className="flex items-center gap-2 justify-center mb-4">
-            <span className="w-10 h-[1px] bg-brand-cyan" />
-            <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Story</h2>
-            <span className="w-10 h-[1px] bg-brand-cyan" />
-          </div>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
-            Not just another dev agency<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
-          </h3>
-          <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-            We noticed a frustrating pattern — startups spending massive amounts of money and months of development on overly complex solutions before even validating if users actually wanted the product. We decided to change that.
-          </p>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-10 h-[1px] bg-brand-cyan" />
+              <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Story</h2>
+            </div>
+            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+              Not just another dev agency<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
+            </h3>
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-6">
+              We noticed a frustrating pattern — startups spending massive amounts of money and months of development on overly complex solutions before even validating if users actually wanted the product.
+            </p>
+            <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
+              We decided to change that. GGIT Systems was built to stop "just writing code" and start building viable businesses.
+            </p>
+            <p className="text-gray-500 text-sm font-mono tracking-wide mt-8">
+              Founded in 2023 — Built on faith, resilience, and an unshakable foundation.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-white/[0.01] border border-white/[0.05]"
+          >
+            <InteractiveCube />
+          </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pillars.map((pillar, index) => (
@@ -73,18 +90,6 @@ export default function About() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-          className="mt-16 text-center"
-        >
-          <p className="text-gray-500 text-sm font-mono tracking-wide">
-            Founded in 2023 — Built on faith, resilience, and an unshakable foundation.
-          </p>
-        </motion.div>
       </div>
     </section>
   )

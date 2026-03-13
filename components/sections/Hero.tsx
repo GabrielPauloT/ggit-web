@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useLenis } from 'lenis/react'
-import InteractiveCube from '../3d/InteractiveCube'
 
 export default function Hero() {
   const lenis = useLenis()
@@ -25,10 +24,6 @@ export default function Hero() {
   }
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-noise">
-      <div className="absolute inset-0 z-0">
-        <InteractiveCube />
-      </div>
-
       <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center">
         <motion.div
           initial="hidden"
@@ -51,7 +46,7 @@ export default function Hero() {
               hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none mix-blend-lighten"
+            className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
           >
             GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]">.</span><br className="md:hidden" />SYSTEMS
           </motion.h1>
