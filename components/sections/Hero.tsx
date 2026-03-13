@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useLenis } from 'lenis/react'
-import HeroBackground from '@/components/3d/HeroBackground'
 import InteractiveCube from '../3d/InteractiveCube'
 
 export default function Hero() {
@@ -26,12 +25,10 @@ export default function Hero() {
   }
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-noise">
-      {/* 3D Background Layer */}
       <div className="absolute inset-0 z-0">
         <InteractiveCube />
       </div>
 
-      {/* Content Layer */}
       <div className="container mx-auto px-6 relative z-10 text-center flex flex-col items-center justify-center">
         <motion.div
           initial="hidden"
@@ -49,8 +46,6 @@ export default function Hero() {
           className="max-w-4xl"
         >
 
-
-          {/* Main Heading */}
           <motion.h1 
             variants={{
               hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
@@ -61,7 +56,6 @@ export default function Hero() {
             GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]">.</span><br className="md:hidden" />SYSTEMS
           </motion.h1>
 
-          {/* Subheading */}
           <motion.p 
             variants={{
               hidden: { opacity: 0, y: 20 },
@@ -69,14 +63,13 @@ export default function Hero() {
             }}
             className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
           >
-            Turning complex challenges into <span className="text-white font-medium relative inline-block group cursor-default">
-              scalable
+            Your strategic tech partner. We <span className="text-white font-medium relative inline-block group cursor-default">
+              validate
               <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-brand-blue to-brand-cyan scale-x-100 origin-left transition-transform group-hover:scale-x-110" />
               <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-brand-cyan blur-[6px] opacity-40 group-hover:opacity-80 transition-opacity" />
-            </span> digital solutions.
+            </span> ideas, build MVPs, and scale when you're ready.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div 
             variants={{
               hidden: { opacity: 0, y: 20 },
@@ -106,7 +99,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div 
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer"
         initial={{ opacity: 0 }}

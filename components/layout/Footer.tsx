@@ -13,7 +13,7 @@ export default function Footer() {
               GGIT<span className="text-brand-blue">.</span>
             </Link>
             <p className="text-gray-400 max-w-sm mb-8 leading-relaxed">
-              Engineering the future of digital business. We build scalable, high-performance systems for forward-thinking companies.
+              Your strategic tech partner bridging Australia and Brazil. We validate ideas, build MVPs, and scale when you're ready.
             </p>
             <div className="flex gap-4">
               {[Github, Linkedin, Mail].map((Icon, i) => (
@@ -27,7 +27,7 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-6 tracking-wide text-lg">Services</h4>
             <ul className="space-y-4 text-gray-400 text-sm">
-              {['Custom Software', 'Mobile Development', 'AI & Automation', 'Industrial IoT'].map((item) => (
+              {['PoC & MVP Development', 'Custom Software', 'Mobile Development', 'AI & Automation', 'Industrial IoT'].map((item) => (
                 <li key={item}>
                   <Link href="#" className="hover:text-brand-cyan transition-colors">{item}</Link>
                 </li>

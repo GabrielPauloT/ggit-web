@@ -3,16 +3,15 @@
 import { motion } from 'framer-motion'
 
 const stats = [
-  { label: 'Large Scale Projects', value: '8+' },
-  { label: 'Efficiency Increase', value: '80%' },
-  { label: 'Hours Saved / Mo', value: '36+' },
-  { label: 'User Satisfaction', value: '98%' },
+  { label: 'Products Launched', value: '8+' },
+  { label: 'Countries Connected', value: '2' },
+  { label: 'Avg. Efficiency Gain', value: '80%' },
+  { label: 'Hours Saved Monthly', value: '36+' },
 ]
 
 export default function Stats() {
   return (
-    <section id="about" className="py-20 border-y border-white/5 relative overflow-hidden backdrop-blur-[2px]">
-      {/* Decorative gradient orb */}
+    <section id="stats" className="py-20 border-y border-white/5 relative overflow-hidden backdrop-blur-[2px]">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-brand-blue/[0.03] rounded-full blur-[100px] pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
