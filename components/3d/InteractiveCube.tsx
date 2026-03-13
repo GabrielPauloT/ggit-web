@@ -1,128 +1,325 @@
 'use client'
 
-import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import React from "react";
+import { useRef, useMemo, useState, useEffect, useCallback } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Float, RoundedBox, Text, Line } from "@react-three/drei";
+import * as THREE from "three";
 
-function checkWebGLSupport(): boolean {
-  if (typeof window === 'undefined') return false;
-  try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (!gl) return false;
-    if (gl instanceof WebGLRenderingContext) {
-      const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-      if (debugInfo) {
-        const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-        if (typeof renderer === 'string' && (renderer.includes('SwiftShader') || renderer.includes('llvmpipe'))) {
-          return false;
-        }
-      }
-    }
-    return true;
-  } catch {
-    return false;
-  }
-}
+function IconCore() {
+  const lines = useMemo(() => {
+    return [
+      [0, -0.35, 0, 0, 0.35, 0],
+      [-0.35, 0, 0, 0.35, 0, 0],
+      [-0.18, -0.18, 0, 0.18, 0.18, 0],
+      [-0.18, 0.18, 0, 0.18, -0.18, 0]
+    ];
+  }, []);
 
-export function CSSCubeFallback() {
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      <motion.div
-        className="relative"
-        style={{ perspective: '800px', width: '160px', height: '160px' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div
-          className="relative"
-          style={{ transformStyle: 'preserve-3d', width: '160px', height: '160px' }}
-          animate={{ rotateX: [25, 35, 25], rotateY: [0, 360] }}
-          transition={{ rotateY: { duration: 20, repeat: Infinity, ease: "linear" }, rotateX: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
-        >
-          {[
-            { transform: 'translateZ(80px)', label: 'I', title: 'THE CORE' },
-            { transform: 'rotateY(180deg) translateZ(80px)', label: 'II', title: 'THE STRUCTURE' },
-            { transform: 'rotateY(90deg) translateZ(80px)', label: 'III', title: 'THE BACKBONE' },
-            { transform: 'rotateY(-90deg) translateZ(80px)', label: 'IV', title: 'THE SHIELD' },
-            { transform: 'rotateX(90deg) translateZ(80px)', label: 'V', title: 'THE INTELLIGENCE' },
-            { transform: 'rotateX(-90deg) translateZ(80px)', label: 'VI', title: 'THE METHOD' },
-          ].map((face, i) => (
-            <div
-              key={i}
-              className="absolute flex flex-col items-center justify-center border border-white/10 bg-[#2a2a35]/80 backdrop-blur-sm rounded-lg"
-              style={{
-                width: '160px',
-                height: '160px',
-                transform: face.transform,
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              <span className="text-[#4a4a6a] text-xs font-mono mb-2">{face.label}</span>
-              <div className="w-8 h-8 rounded-sm bg-white/5 border border-white/10 mb-2" />
-              <span className="text-gray-500 text-[10px] font-mono tracking-widest uppercase">{face.title}</span>
-            </div>
-          ))}
-        </motion.div>
-      </motion.div>
-    </div>
+    <group>
+      {lines.map((coords, i) => (
+        <Line 
+          key={i} 
+          points={[[coords[0], coords[1], coords[2]], [coords[3], coords[4], coords[5]]]} 
+          color="white" 
+          lineWidth={2.5} 
+          transparent 
+          opacity={i < 2 ? 1 : 0.7}
+        />
+      ))}
+      <mesh position={[0,0,0]}>
+        <circleGeometry args={[0.04, 16]} />
+        <meshBasicMaterial color="white" transparent opacity={1} />
+      </mesh>
+    </group>
   );
 }
 
-const ThreeJSCube = dynamic(() => import('@/components/3d/ThreeJSCube'), {
-  ssr: false,
-  loading: () => <CSSCubeFallback />,
-});
+function IconStructure() {
+  return (
+    <Text
+      fontSize={0.5}
+      color="#ffffff"
+      anchorX="center"
+      anchorY="middle"
+      characters="{ }"
+    >
+      {"{ }"}
+    </Text>
+  );
+}
 
-class CubeErrorBoundary extends React.Component<{ children: React.ReactNode; onError: () => void }, { hasError: boolean }> {
-  constructor(props: { children: React.ReactNode; onError: () => void }) {
-    super(props);
-    this.state = { hasError: false };
-  }
+function IconBackbone() {
+  const hexRadius = 0.12;
+  const positions = [
+    [0, 0, 0],
+    [0.22, 0.12, 0],
+    [-0.22, 0.12, 0],
+    [0.22, -0.12, 0],
+    [-0.22, -0.12, 0],
+    [0, 0.24, 0],
+    [0, -0.24, 0]
+  ];
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
+  return (
+    <group>
+      {positions.map((pos, i) => (
+         <mesh key={i} position={[pos[0] as number, pos[1] as number, 0]}>
+           <ringGeometry args={[hexRadius * 0.8, hexRadius, 6]} />
+           <meshBasicMaterial color="#ffffff" transparent opacity={0.8} side={THREE.DoubleSide} />
+         </mesh>
+      ))}
+    </group>
+  )
+}
 
-  componentDidCatch() {
-    this.props.onError();
-  }
+function IconShield() {
+  const points = useMemo(() => {
+    const s = new THREE.Shape();
+    s.moveTo(0, 0.3);
+    s.lineTo(0.25, 0.2);
+    s.lineTo(0.2, -0.1);
+    s.quadraticCurveTo(0, -0.35, 0, -0.35);
+    s.quadraticCurveTo(-0.2, -0.1, -0.2, -0.1);
+    s.lineTo(-0.25, 0.2);
+    s.lineTo(0, 0.3);
+    return s.getPoints().map(p => [p.x, p.y, 0] as [number, number, number]);
+  }, []);
 
-  render() {
-    if (this.state.hasError) {
-      return <CSSCubeFallback />;
+  return (
+    <group>
+      <Line 
+        points={points} 
+        color="white" 
+        lineWidth={2} 
+        transparent 
+        opacity={0.9} 
+      />
+      <mesh position={[0,0,-0.01]}>
+         <shapeGeometry args={[new THREE.Shape(points.map(p => new THREE.Vector2(p[0], p[1])))]} />
+         <meshBasicMaterial color="#ffffff" transparent opacity={0.1} />
+      </mesh>
+    </group>
+  );
+}
+
+function IconIntelligence() {
+  const nodes = [
+    [-0.15, 0.25, 0], [0.15, 0.25, 0],
+    [-0.25, 0, 0], [0, 0, 0], [0.25, 0, 0],
+    [-0.15, -0.25, 0], [0.15, -0.25, 0]
+  ];
+
+  const connections = useMemo(() => {
+    const lines: [number, number, number][] = [];
+    [0, 1].forEach(topIdx => {
+      [2, 3, 4].forEach(midIdx => {
+        lines.push(nodes[topIdx] as [number, number, number]);
+        lines.push(nodes[midIdx] as [number, number, number]);
+      });
+    });
+    [2, 3, 4].forEach(midIdx => {
+      [5, 6].forEach(botIdx => {
+        lines.push(nodes[midIdx] as [number, number, number]);
+        lines.push(nodes[botIdx] as [number, number, number]);
+      });
+    });
+    return lines;
+  }, []);
+
+  return (
+    <group>
+       {nodes.map((pos, i) => (
+         <mesh key={i} position={[pos[0], pos[1], 0]}>
+           <circleGeometry args={[0.03, 16]} />
+           <meshBasicMaterial color="#ffffff" transparent opacity={0.9} />
+         </mesh>
+       ))}
+       <Line
+          points={connections}
+          color="white"
+          lineWidth={1.5}
+          transparent
+          opacity={0.5}
+          segments
+       />
+    </group>
+  );
+}
+
+function IconMethod() {
+   return (
+    <Text
+      fontSize={0.6}
+      color="#ffffff"
+      anchorX="center"
+      anchorY="middle"
+    >
+      ∞
+    </Text>
+   );
+}
+
+function CubeFace({ 
+  position, 
+  rotation, 
+  size, 
+  roman, 
+  title, 
+  children 
+}: { 
+  position: [number, number, number]; 
+  rotation: [number, number, number]; 
+  size: [number, number];
+  roman: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <group position={position} rotation={rotation}>
+      <mesh position={[0, 0, -0.02]}>
+        <planeGeometry args={[size[0] * 0.7, size[1] * 0.7]} />
+        <meshStandardMaterial color="#1a1a2e" roughness={0.6} metalness={0.3} />
+      </mesh>
+      <mesh position={[0, 0, -0.01]}>
+        <planeGeometry args={[size[0] * 0.75, size[1] * 0.75]} />
+        <meshStandardMaterial color="#2a2a3e" roughness={0.5} metalness={0.4} />
+      </mesh>
+      
+      <group position={[0, 0, 0.02]}>
+          <Text
+            position={[0, 0.5, 0]}
+            fontSize={0.15}
+            color="#4a4a6a"
+            anchorX="center"
+            anchorY="middle"
+          >
+            {roman}
+          </Text>
+
+          <group position={[0, 0.05, 0]}>
+            {children}
+          </group>
+
+          <Text
+            position={[0, -0.5, 0]}
+            fontSize={0.08}
+            color="#6b7280"
+            anchorX="center"
+            anchorY="middle"
+            letterSpacing={0.1}
+          >
+            {title}
+          </Text>
+      </group>
+    </group>
+  );
+}
+
+function ContextLossDetector({ onContextLost }: { onContextLost: () => void }) {
+  const { gl } = useThree();
+  
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const handleContextLost = () => onContextLost();
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+    return () => canvas.removeEventListener('webglcontextlost', handleContextLost);
+  }, [gl, onContextLost]);
+  
+  return null;
+}
+
+function CubeGeometry() {
+  const groupRef = useRef<THREE.Group>(null);
+  const { viewport } = useThree();
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.15 + 0.5;
+      groupRef.current.rotation.y += 0.004;
     }
-    return this.props.children;
-  }
+  });
+
+  const scale = useMemo(() => {
+    return Math.min(1, viewport.width / 3.5);
+  }, [viewport.width]);
+
+  const faceOffset = 1.001;
+
+  return (
+    <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.4}>
+      <group ref={groupRef} scale={scale}>
+        <RoundedBox args={[2, 2, 2]} radius={0.15} smoothness={4}>
+          <meshStandardMaterial
+            color="#2a2a35"
+            roughness={0.4}
+            metalness={0.6}
+          />
+        </RoundedBox>
+
+        <CubeFace position={[0, 0, faceOffset]} rotation={[0, 0, 0]} size={[2, 2]} roman="I" title="THE CORE">
+            <IconCore />
+        </CubeFace>
+
+        <CubeFace position={[0, 0, -faceOffset]} rotation={[0, Math.PI, 0]} size={[2, 2]} roman="II" title="THE STRUCTURE">
+            <IconStructure />
+        </CubeFace>
+
+        <CubeFace position={[faceOffset, 0, 0]} rotation={[0, Math.PI / 2, 0]} size={[2, 2]} roman="III" title="THE BACKBONE">
+            <IconBackbone />
+        </CubeFace>
+
+        <CubeFace position={[-faceOffset, 0, 0]} rotation={[0, -Math.PI / 2, 0]} size={[2, 2]} roman="IV" title="THE SHIELD">
+            <IconShield />
+        </CubeFace>
+
+        <CubeFace position={[0, faceOffset, 0]} rotation={[-Math.PI / 2, 0, 0]} size={[2, 2]} roman="V" title="THE INTELLIGENCE">
+            <IconIntelligence />
+        </CubeFace>
+
+        <CubeFace position={[0, -faceOffset, 0]} rotation={[Math.PI / 2, 0, 0]} size={[2, 2]} roman="VI" title="THE METHOD">
+            <IconMethod />
+        </CubeFace>
+
+        <RoundedBox args={[2.02, 2.02, 2.02]} radius={0.16} smoothness={4}>
+          <meshStandardMaterial
+            color="#3a3a4a"
+            transparent
+            opacity={0.15}
+            roughness={0.3}
+            metalness={0.8}
+          />
+        </RoundedBox>
+      </group>
+    </Float>
+  );
 }
 
 export default function InteractiveCube() {
-  const [useFallback, setUseFallback] = useState(false);
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    const supported = checkWebGLSupport();
-    if (!supported) {
-      setUseFallback(true);
-    }
-    setChecked(true);
-  }, []);
+  const [contextLost, setContextLost] = useState(false);
 
   const handleContextLost = useCallback(() => {
-    setUseFallback(true);
+    setContextLost(true);
   }, []);
 
-  if (!checked) return null;
-
-  if (useFallback) {
-    return <CSSCubeFallback />;
+  if (contextLost) {
+    return <div className="w-full h-full bg-transparent" />;
   }
 
   return (
-    <CubeErrorBoundary onError={() => setUseFallback(true)}>
-      <ThreeJSCube onContextLost={handleContextLost} />
-    </CubeErrorBoundary>
+    <div className="w-full h-full">
+      <Canvas
+        camera={{ position: [3, 2, 4], fov: 45 }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ background: "transparent" }}
+      >
+        <ambientLight intensity={0.4} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} color="#e0e0ff" />
+        <pointLight position={[-5, 3, 5]} intensity={0.4} color="#ffffff" />
+        <pointLight position={[0, -5, 0]} intensity={0.2} color="#4a4a6a" />
+        <ContextLossDetector onContextLost={handleContextLost} />
+        <CubeGeometry />
+      </Canvas>
+    </div>
   );
 }
