@@ -30,7 +30,7 @@ export default function Portfolio() {
             <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Selected Works</h2>
           </div>
           <h3 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-            Digital Excellence<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]">.</span>
+            Digital Excellence<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
           </h3>
           <p className="text-gray-400 max-w-2xl">
             We build systems that scale. From Industrial IoT to Consumer Apps, our engineering drives real business impact.
@@ -45,7 +45,7 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group relative cursor-pointer bg-white/[0.02] border border-white/[0.05] rounded-3xl overflow-hidden hover:border-brand-blue/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:bg-white/[0.04] flex flex-col"
+              className="group relative cursor-pointer bg-white/[0.02] border border-white/[0.05] rounded-3xl overflow-hidden hover:border-brand-blue/50 transition-all duration-500 hover:shadow-[0_0_40px_rgba(245,158,11,0.2)] hover:bg-white/[0.04] flex flex-col"
             >
               {/* Optional glow effect behind card */}
               <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

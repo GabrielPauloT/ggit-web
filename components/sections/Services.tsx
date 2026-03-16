@@ -50,7 +50,7 @@ export default function Services() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white tracking-tight">
-            How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_15px_rgba(124,58,237,0.4)]">Build</span>
+            How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_15px_rgba(245,158,11,0.4)]">Build</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">
             The right technology, at the right time, for the exact stage of your business.
@@ -69,7 +69,7 @@ export default function Services() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/10 via-transparent to-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-xl pointer-events-none" />
               
-              <div className="mb-8 p-4 bg-brand-blue/[0.05] border border-brand-blue/20 w-fit rounded-2xl group-hover:bg-brand-blue/20 group-hover:scale-110 group-hover:border-brand-blue/50 transition-all duration-500 relative z-10 shadow-[0_0_15px_rgba(124,58,237,0.1)] group-hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]">
+              <div className="mb-8 p-4 bg-brand-blue/[0.05] border border-brand-blue/20 w-fit rounded-2xl group-hover:bg-brand-blue/20 group-hover:scale-110 group-hover:border-brand-blue/50 transition-all duration-500 relative z-10 shadow-[0_0_15px_rgba(245,158,11,0.1)] group-hover:shadow-[0_0_30px_rgba(6,182,212,0.4)]">
                 <service.icon className="w-8 h-8 text-brand-blue group-hover:text-cyan-300 transition-colors duration-500" />
               </div>
               <h3 className="text-2xl font-semibold text-white mb-4 group-hover:text-brand-cyan transition-colors relative z-10 drop-shadow-md">
