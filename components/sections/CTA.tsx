@@ -39,7 +39,7 @@ export default function CTA() {
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-            Ready to build<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_15px_rgba(37,99,235,0.4)]">?</span>
+            Ready to build<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_15px_rgba(124,58,237,0.4)]">?</span>
           </h2>
           <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-10 max-w-xl mx-auto">
             Whether you're validating an idea or scaling a product, we'll find the smartest path forward for your stage.
@@ -48,7 +48,7 @@ export default function CTA() {
             onClick={handleScroll}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative cursor-pointer bg-gradient-to-r from-brand-blue to-brand-cyan text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-[0_0_30px_rgba(37,99,235,0.3)] hover:shadow-[0_0_50px_rgba(6,182,212,0.4)] flex items-center gap-3 mx-auto overflow-hidden"
+            className="group relative cursor-pointer bg-gradient-to-r from-brand-blue to-brand-cyan text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-[0_0_30px_rgba(124,58,237,0.3)] hover:shadow-[0_0_50px_rgba(59,130,246,0.4)] flex items-center gap-3 mx-auto overflow-hidden"
           >
             <span className="relative z-10">Let's Talk</span>
             <div className="relative z-10 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">

@@ -77,7 +77,7 @@ export default function Navbar() {
           onClick={(e) => handleNavClick(e, '/')}
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 group-hover:to-brand-cyan transition-all duration-500">GGIT</span>
-          <span className="text-brand-blue group-hover:text-brand-cyan transition-colors ml-0.5 drop-shadow-[0_0_8px_rgba(37,99,235,0.8)] group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]">.</span>
+          <span className="text-brand-blue group-hover:text-brand-cyan transition-colors ml-0.5 drop-shadow-[0_0_8px_rgba(124,58,237,0.8)] group-hover:drop-shadow-[0_0_12px_rgba(59,130,246,0.8)]">.</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -96,7 +96,7 @@ export default function Navbar() {
           
           <button 
             onClick={(e) => handleNavClick(e as any, '#contact')}
-            className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hover:border-brand-cyan hover:bg-brand-cyan/20 shadow-[0_0_15px_rgba(37,99,235,0.1)] hover:shadow-[0_0_25px_rgba(6,182,212,0.3)] backdrop-blur-md overflow-hidden"
+            className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 hover:border-brand-cyan hover:bg-brand-cyan/20 shadow-[0_0_15px_rgba(124,58,237,0.1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.3)] backdrop-blur-md overflow-hidden"
           >
             <span className="relative z-10">Let's Talk</span>
             <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/0 via-brand-cyan/10 to-brand-blue/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 pointer-events-none" />

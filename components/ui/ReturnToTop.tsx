@@ -37,7 +37,7 @@ export default function ReturnToTop() {
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
           transition={{ duration: 0.3, ease: 'easeOut' }}
           onClick={handleScrollTop}
-          className="fixed bottom-6 right-6 z-50 cursor-pointer p-3 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan hover:bg-brand-blue/20 hover:border-brand-blue/50 hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(37,99,235,0.15)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] backdrop-blur-md group"
+          className="fixed bottom-6 right-6 z-50 cursor-pointer p-3 rounded-full bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan hover:bg-brand-blue/20 hover:border-brand-blue/50 hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(124,58,237,0.15)] hover:shadow-[0_0_30px_rgba(124,58,237,0.4)] backdrop-blur-md group"
           aria-label="Return to top"
         >
           <ArrowUp className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" />

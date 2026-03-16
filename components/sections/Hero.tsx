@@ -54,7 +54,7 @@ export default function Hero() {
             }}
             className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
           >
-            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(37,99,235,0.4)]">.</span><br className="md:hidden" />SYSTEMS
+            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(124,58,237,0.4)]">.</span><br className="md:hidden" />SYSTEMS
           </motion.h1>
 
           <motion.p 
@@ -80,7 +80,7 @@ export default function Hero() {
           >
             <button 
               onClick={() => handleScroll('#projects')}
-              className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-white px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:border-brand-blue hover:bg-brand-blue/20 shadow-[0_0_20px_rgba(37,99,235,0.15)] hover:shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center gap-3 overflow-hidden backdrop-blur-md"
+              className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-white px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:border-brand-blue hover:bg-brand-blue/20 shadow-[0_0_20px_rgba(124,58,237,0.15)] hover:shadow-[0_0_40px_rgba(124,58,237,0.4)] flex items-center gap-3 overflow-hidden backdrop-blur-md"
             >
               <span className="relative z-10 text-brand-cyan group-hover:text-white transition-colors duration-300">Explore Work</span>
               <div className="relative z-10 w-8 h-8 rounded-full bg-brand-blue/20 flex items-center justify-center group-hover:bg-brand-blue group-hover:scale-110 transition-all duration-300">

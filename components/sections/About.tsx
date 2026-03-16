@@ -41,7 +41,7 @@ export default function About() {
               <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Story</h2>
             </div>
             <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
-              Not just another dev agency<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
+              Not just another dev agency<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]">.</span>
             </h3>
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-6">
               We noticed a frustrating pattern — startups spending massive amounts of money and months of development on overly complex solutions before even validating if users actually wanted the product.
