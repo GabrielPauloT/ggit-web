@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Lightbulb, TrendingUp } from 'lucide-react'
+import { MapPin, Lightbulb, TrendingUp, BrainCircuit } from 'lucide-react'
 import InteractiveCube from '@/components/3d/InteractiveCube'
 
 const pillars = [
@@ -14,6 +14,11 @@ const pillars = [
     icon: TrendingUp,
     title: 'Scale When Ready',
     description: 'From no-code prototypes to fully custom high-code architecture — we match the technology to your business stage, so budget and time are never barriers to innovation.',
+  },
+  {
+    icon: BrainCircuit,
+    title: 'AI-Driven',
+    description: 'We identify where Artificial Intelligence can cut operational costs — from automating repetitive tasks to predictive analytics in dashboards. AI is our ally, not a buzzword.',
   },
   {
     icon: MapPin,
@@ -65,7 +70,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {pillars.map((pillar, index) => (
             <motion.div
               key={index}

@@ -27,8 +27,8 @@ const steps = [
     icon: Hammer,
     title: 'Build',
     subtitle: 'Design & Develop',
-    description: 'With validation in hand, we build the real product. Right architecture, right stack, right level of complexity for your stage.',
-    deliverables: ['MVP Development', 'UI/UX Design', 'API Architecture', 'Quality Assurance'],
+    description: 'With validation in hand, we build the real product using AI-accelerated workflows — cleaner code, faster delivery, and optimized cost.',
+    deliverables: ['MVP Development', 'UI/UX Design', 'AI-Assisted Architecture', 'Quality Assurance'],
     color: 'brand-blue',
   },
   {
@@ -64,7 +64,7 @@ export default function Process() {
             From idea to product<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
           </h3>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">
-            Every project follows a proven path. No shortcuts, no guesswork — just a clear methodology that delivers results.
+            Every project follows a proven path. No shortcuts, no guesswork — just a clear methodology accelerated by AI-powered development tools.
           </p>
         </motion.div>
 

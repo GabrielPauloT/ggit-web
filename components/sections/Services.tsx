@@ -35,8 +35,8 @@ const services = [
   {
     icon: Bot,
     title: 'AI & Automation',
-    description: 'Intelligent agents, chatbots, and automation workflows that streamline operations and cut response times.',
-    tags: ['LLMs', 'WhatsApp Bots', 'Workflow Automation'],
+    description: 'We automate document triage, customer support, and operational workflows using AI — saving your team dozens of hours every month.',
+    tags: ['LLMs', 'WhatsApp Bots', 'Predictive Analytics', 'RAG'],
     gradient: 'from-emerald-500/20 via-green-500/10 to-transparent',
   },
   {

@@ -1,0 +1,36 @@
+Adicionar Inteligência Artificial ao seu posicionamento é uma excelente jogada, mas o segredo para não soar apenas como mais uma palavra da moda (buzzword) é ser extremamente prático. O cliente precisa entender como a IA vai economizar dinheiro, tempo ou gerar mais vendas para ele.
+
+Para a sua software house, você pode abordar a IA de duas frentes diferentes no site: IA no Produto (o que você constrói para eles) e IA no Processo (como vocês trabalham).
+
+Aqui estão algumas formas e textos de exemplo para você adaptar e incluir no site:
+
+1. IA no Produto (O que você entrega)
+O foco aqui é mostrar que vocês constroem sistemas que já nascem inteligentes. Você pode destacar isso na seção de "Serviços" ou "Nossas Soluções".
+
+Exemplo de Copy (Texto): > "Sistemas Inteligentes e Prontos para o Futuro"
+
+"Não criamos apenas software; desenvolvemos soluções potencializadas por Inteligência Artificial. Seja integrando modelos de linguagem (LLMs) para automatizar o atendimento, criando algoritmos de matching para otimização de rotas logísticas, ou facilitando a extração de dados em plataformas de gestão, usamos a IA para dar vantagem competitiva ao seu negócio."
+
+Onde usar: Na página inicial, logo abaixo dos serviços principais (Desenvolvimento Web, MVPs, etc).
+
+2. IA no Processo (Como vocês trabalham)
+Aqui você vende velocidade e qualidade. Clientes B2B, especialmente os que buscam MVPs ou refatoração de arquitetura, adoram saber que a equipe é eficiente.
+
+Exemplo de Copy (Texto):
+
+"Desenvolvimento Acelerado com IA"
+"Na GGIT Systems, a Inteligência Artificial é nossa aliada nos bastidores. Utilizamos ferramentas avançadas de IA em nosso fluxo de trabalho para acelerar a escrita de código, otimizar refatorações complexas e garantir uma arquitetura de software (como Next.js e NestJS) mais limpa e segura. O resultado? Seu MVP no mercado em menos tempo e com custo otimizado."
+
+Onde usar: Na página "Sobre Nós", "Como Trabalhamos" ou "Nosso Processo".
+
+3. Criando um "Pilar de Valor"
+Se você tiver uma seção de ícones mostrando os diferenciais da empresa (ex: Escalabilidade, Segurança, Design Intuitivo), adicione um quarto pilar:
+
+Ícone: Um cérebro ou engrenagens com brilho.
+
+Título: "IA-Driven" ou "Potencializado por IA"
+
+Descrição: "Analisamos as dores do seu negócio para identificar onde a Inteligência Artificial pode reduzir custos operacionais, desde a automação de tarefas repetitivas até análises preditivas em painéis de controle."
+
+A Regra de Ouro para Vender IA
+Sempre conecte a tecnologia ao resultado de negócio. Em vez de dizer "Nós integramos a API da OpenAI", diga "Automatizamos a triagem de documentos do seu sistema de RH usando Inteligência Artificial, economizando dezenas de horas da sua equipe."
