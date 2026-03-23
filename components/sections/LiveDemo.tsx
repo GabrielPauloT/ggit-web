@@ -72,14 +72,14 @@ export default function LiveDemo() {
                     transition={{ delay: index * 0.15 + 0.5, duration: 0.5 }}
                     className="absolute -top-5 left-0 sm:left-1/2 sm:-translate-x-1/2 z-20 max-w-[calc(100%-1rem)] sm:max-w-none sm:whitespace-nowrap"
                   >
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue/15 border border-brand-blue/30 rounded-full backdrop-blur-sm">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue/15 border border-brand-blue/30 rounded-full">
                       <Bot className="w-3 h-3 text-brand-blue flex-shrink-0" />
                       <span className="text-[10px] sm:text-[11px] text-brand-cyan font-medium">{step.aiBadge}</span>
                     </div>
                   </motion.div>
                 )}
 
-                <div className="bg-[#0d0d0d] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-brand-blue/20 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.05)]">
+                <div className="bg-[#0d0d0d] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-brand-blue/20 transition-colors duration-500">
                   <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
                     <div className="flex items-center gap-2">
                       <step.icon className="w-4 h-4 text-gray-500 group-hover:text-brand-cyan transition-colors duration-300" />
@@ -111,7 +111,7 @@ export default function LiveDemo() {
                 </div>
 
                 {index < flowSteps.length - 1 && (
-                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 z-20 drop-shadow-[0_0_6px_rgba(6,182,212,0.6)]">
+                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 z-20 lg:drop-shadow-[0_0_6px_rgba(6,182,212,0.6)]">
                     <ArrowRight className="w-5 h-5 text-brand-cyan" />
                   </div>
                 )}

@@ -49,12 +49,12 @@ export default function Hero() {
 
           <motion.h1 
             variants={{
-              hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
-              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
+              hidden: { opacity: 0, y: 40 },
+              visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
             }}
             className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
           >
-            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(245,158,11,0.4)]">.</span><br className="md:hidden" />SYSTEMS
+            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span><br className="md:hidden" />SYSTEMS
           </motion.h1>
 
           <motion.p 
@@ -66,8 +66,7 @@ export default function Hero() {
           >
             Your strategic tech partner. We <span className="text-white font-medium relative inline-block group cursor-default">
               validate
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-brand-blue to-brand-cyan scale-x-100 origin-left transition-transform group-hover:scale-x-110" />
-              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-brand-cyan blur-[6px] opacity-40 group-hover:opacity-80 transition-opacity" />
+              <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-brand-blue to-brand-cyan" />
             </span> ideas, build MVPs, and scale when you're ready.
           </motion.p>
 
@@ -80,21 +79,20 @@ export default function Hero() {
           >
             <button 
               onClick={() => handleScroll('#projects')}
-              className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-white px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:border-brand-blue hover:bg-brand-blue/20 shadow-[0_0_20px_rgba(245,158,11,0.15)] hover:shadow-[0_0_40px_rgba(245,158,11,0.4)] flex items-center gap-3 overflow-hidden backdrop-blur-md"
+              className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-white px-8 py-3.5 rounded-full font-medium transition-colors duration-300 hover:border-brand-blue hover:bg-brand-blue/20 flex items-center gap-3 overflow-hidden"
             >
               <span className="relative z-10 text-brand-cyan group-hover:text-white transition-colors duration-300">Explore Work</span>
-              <div className="relative z-10 w-8 h-8 rounded-full bg-brand-blue/20 flex items-center justify-center group-hover:bg-brand-blue group-hover:scale-110 transition-all duration-300">
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <div className="relative z-10 w-8 h-8 rounded-full bg-brand-blue/20 flex items-center justify-center group-hover:bg-brand-blue transition-colors duration-300">
+                <ArrowRight className="w-4 h-4" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/20 to-brand-cyan/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             </button>
             
             <button 
               onClick={() => handleScroll('#contact')}
-              className="px-8 py-3.5 cursor-pointer rounded-full font-medium text-gray-400 hover:text-white transition-all hover:bg-white/5 relative overflow-hidden group"
+              className="px-8 py-3.5 cursor-pointer rounded-full font-medium text-gray-400 hover:text-white transition-colors hover:bg-white/5 relative overflow-hidden group"
             >
               <span className="relative z-10">Contact Us</span>
-              <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white/30 group-hover:w-full group-hover:left-0 transition-all duration-300" />
+              <span className="absolute bottom-0 left-1/2 w-0 h-[1px] bg-white/30 group-hover:w-full group-hover:left-0 transition-[width,left] duration-300" />
             </button>
           </motion.div>
         </motion.div>

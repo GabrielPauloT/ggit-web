@@ -24,7 +24,7 @@ const advantages = [
 export default function DirectContact() {
   return (
     <section id="how-we-work" className="py-32 relative overflow-hidden">
-      <div className="absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-brand-cyan/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="section-glow absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-brand-cyan/[0.03] rounded-full blur-[120px]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -58,10 +58,10 @@ export default function DirectContact() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="group p-6 bg-white/[0.02] border border-white/[0.05] hover:border-brand-blue/30 rounded-2xl transition-all duration-500 flex items-start gap-5 relative overflow-hidden"
+                className="group p-6 bg-white/[0.02] border border-white/[0.05] hover:border-brand-blue/30 rounded-2xl transition-colors duration-500 flex items-start gap-5 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                <div className="p-3 bg-brand-blue/[0.08] border border-brand-blue/20 rounded-xl flex-shrink-0 group-hover:bg-brand-blue/15 group-hover:border-brand-blue/40 transition-all duration-500 relative z-10">
+                <div className="p-3 bg-brand-blue/[0.08] border border-brand-blue/20 rounded-xl flex-shrink-0 group-hover:bg-brand-blue/15 group-hover:border-brand-blue/40 transition-colors duration-500 relative z-10">
                   <item.icon className="w-6 h-6 text-brand-blue group-hover:text-brand-cyan transition-colors duration-500" />
                 </div>
                 <div className="relative z-10">

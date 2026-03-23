@@ -45,7 +45,7 @@ const steps = [
 export default function Process() {
   return (
     <section id="process" className="py-32 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/[0.03] rounded-full blur-[150px] pointer-events-none" />
+      <div className="section-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/[0.03] rounded-full blur-[150px]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -87,15 +87,15 @@ export default function Process() {
                   </div>
                 )}
 
-                <div className="p-8 bg-white/[0.02] border border-white/[0.05] rounded-3xl hover:border-brand-blue/30 transition-all duration-500 relative overflow-hidden h-full flex flex-col">
+                <div className="p-8 bg-white/[0.02] border border-white/[0.05] rounded-3xl hover:border-brand-blue/30 transition-colors duration-500 relative overflow-hidden h-full flex flex-col">
                   <div className="absolute inset-0 bg-gradient-to-b from-brand-blue/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
                   <div className="flex items-center justify-between mb-6 relative z-10">
                     <span className="text-5xl font-bold text-white/[0.06] font-mono group-hover:text-brand-blue/20 transition-colors duration-500">
                       {step.number}
                     </span>
-                    <div className={`p-3 bg-${step.color}/[0.08] border border-${step.color}/20 rounded-xl group-hover:bg-${step.color}/20 group-hover:border-${step.color}/40 transition-all duration-500`}>
-                      <step.icon className={`w-6 h-6 text-${step.color} group-hover:scale-110 transition-transform duration-500`} />
+                    <div className={`p-3 bg-${step.color}/[0.08] border border-${step.color}/20 rounded-xl group-hover:bg-${step.color}/20 group-hover:border-${step.color}/40 transition-colors duration-500`}>
+                      <step.icon className={`w-6 h-6 text-${step.color}`} />
                     </div>
                   </div>
 

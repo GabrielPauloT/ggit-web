@@ -4,7 +4,6 @@
   --background: #0a0a0a;
   --foreground: #ededed;
 
-  /* Sunset Warm Palette */
   --electric-blue: #f59e0b;
   --cyan-glow: #06b6d4;
   --dark-navy: #111827;
@@ -54,17 +53,23 @@
 body {
   background-color: var(--background);
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 40px 40px, 40px 40px;
+    radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Noise overlay utility */
+@media (min-width: 768px) {
+  body {
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+  }
+}
+
 .bg-noise {
   position: relative;
 }
@@ -78,7 +83,12 @@ body {
   z-index: 0;
 }
 
-/* Custom Scrollbar for 'Deep Tech' feel */
+@media (max-width: 767px) {
+  .bg-noise::before {
+    display: none;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -101,6 +111,7 @@ body {
   border-radius: 50%;
   filter: blur(120px);
   opacity: 0;
+  will-change: transform, opacity;
   animation: hero-glow-drift 12s ease-in-out infinite;
 }
 
@@ -170,9 +181,37 @@ body {
   }
 }
 
+@media (max-width: 767px) {
+  .hero-glow-orb {
+    filter: blur(80px);
+    animation-duration: 20s;
+  }
+  .hero-glow-orb-1 {
+    width: 300px;
+    height: 300px;
+  }
+  .hero-glow-orb-2 {
+    width: 250px;
+    height: 250px;
+  }
+  .hero-glow-orb-3 {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-glow-orb {
     animation: none;
     opacity: 0.4;
+  }
+}
+
+.section-glow {
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .section-glow {
+    display: none;
   }
 }

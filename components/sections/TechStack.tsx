@@ -87,7 +87,7 @@ function CodeBlock() {
         {codeLines.map((line, i) => (
           <div
             key={i}
-            className={`transition-all duration-300 ${i < visibleLines ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+            className={`transition-[opacity,transform] duration-300 ${i < visibleLines ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
             style={{ paddingLeft: `${line.indent * 24}px` }}
           >
             {line.text ? (
@@ -100,7 +100,7 @@ function CodeBlock() {
             )}
           </div>
         ))}
-        <div className={`mt-1 transition-all duration-500 ${visibleLines >= codeLines.length ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`mt-1 transition-opacity duration-500 ${visibleLines >= codeLines.length ? 'opacity-100' : 'opacity-0'}`}>
           <span className="text-gray-700 select-none mr-4"> &gt;</span>
           <span className="inline-block w-2 h-4 bg-brand-blue animate-pulse" />
         </div>
@@ -112,7 +112,7 @@ function CodeBlock() {
 export default function TechStack() {
   return (
     <section id="tech-stack" className="py-32 relative overflow-hidden">
-      <div className="absolute top-0 left-[-20%] w-[600px] h-[600px] bg-brand-blue/[0.03] rounded-full blur-[150px] pointer-events-none" />
+      <div className="section-glow absolute top-0 left-[-20%] w-[600px] h-[600px] bg-brand-blue/[0.03] rounded-full blur-[150px]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -141,7 +141,7 @@ export default function TechStack() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
-                  className="p-3 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:border-brand-blue/30 transition-all duration-300 group"
+                  className="p-3 bg-white/[0.03] border border-white/[0.06] rounded-xl hover:border-brand-blue/30 transition-colors duration-300 group"
                 >
                   <p className="text-white text-sm font-medium group-hover:text-brand-cyan transition-colors">{tech.name}</p>
                   <p className="text-gray-500 text-xs">{tech.role}</p>

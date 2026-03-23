@@ -9,8 +9,8 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer id="contact" className="relative bg-black/40 backdrop-blur-xl border-t border-white/10 pt-20 pb-8 text-white overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[150px] bg-brand-blue/[0.03] rounded-full blur-[80px] pointer-events-none" />
+    <footer id="contact" className="relative bg-[#050505] border-t border-white/10 pt-20 pb-8 text-white overflow-hidden">
+      <div className="section-glow absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[150px] bg-brand-blue/[0.03] rounded-full blur-[80px]" />
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
@@ -28,7 +28,7 @@ export default function Footer() {
                   target={href.startsWith('mailto') ? undefined : '_blank'}
                   rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                   aria-label={label}
-                  className="p-3 bg-white/5 rounded-full hover:bg-brand-blue hover:text-white transition-all duration-300 hover:scale-110 border border-white/5 hover:border-brand-blue/50"
+                  className="p-3 bg-white/5 rounded-full hover:bg-brand-blue hover:text-white transition-colors duration-300 border border-white/5 hover:border-brand-blue/50"
                 >
                   <Icon size={20} />
                 </a>

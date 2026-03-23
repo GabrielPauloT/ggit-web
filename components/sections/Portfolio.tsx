@@ -18,9 +18,8 @@ const projectColors = [
 
 function HoverCard({ project, color }: { project: typeof projects[0]; color: typeof projectColors[0] }) {
   return (
-    <div className={`w-72 sm:w-80 rounded-2xl border border-white/10 overflow-hidden bg-gradient-to-br ${color.from} ${color.to} backdrop-blur-xl shadow-2xl shadow-black/50`}>
+    <div className={`w-72 sm:w-80 rounded-2xl border border-white/10 overflow-hidden bg-gradient-to-br ${color.from} ${color.to} bg-[#111] shadow-2xl shadow-black/50`}>
       <div className="h-40 flex items-center justify-center relative">
-        <div className="absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
         <div className="text-center px-6 relative z-10">
           <p className="text-white/90 font-semibold text-lg mb-1">{project.title}</p>
           <p className={`text-xs font-mono ${color.accent}`}>{project.category}</p>
@@ -101,8 +100,8 @@ function ProjectRow({ project, index, color }: {
           <span className="hidden md:inline-block text-xs text-gray-600 font-mono group-hover:text-gray-400 transition-colors">
             {project.category}
           </span>
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-brand-cyan/50 group-hover:bg-brand-cyan/10 transition-all duration-300">
-            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 group-hover:text-brand-cyan group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-brand-cyan/50 group-hover:bg-brand-cyan/10 transition-colors duration-300">
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 group-hover:text-brand-cyan transition-colors duration-300" />
           </div>
         </div>
       </div>
@@ -149,7 +148,7 @@ function ProjectRow({ project, index, color }: {
 export default function Portfolio() {
   return (
     <section id="projects" className="py-32 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="section-glow absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-[100px]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -163,7 +162,7 @@ export default function Portfolio() {
             <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Selected Works</h2>
           </div>
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-            Digital Excellence<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
+            Digital Excellence<span className="text-brand-cyan md:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
           </h3>
         </motion.div>
 

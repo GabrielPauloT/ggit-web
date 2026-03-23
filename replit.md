@@ -14,9 +14,9 @@ Marketing/portfolio website for GGIT Systems — a strategic tech partner bridgi
 ## Project Structure
 - `app/` — Next.js App Router pages and layouts
 - `components/3d/` — 3D components (InteractiveCube with WebGL fallback)
-- `components/sections/` — Page sections (Hero, Stats, About, Services, Portfolio, CTA)
+- `components/sections/` — Page sections (Hero, About, TechStack, LiveDemo, DirectContact, Services, Process, Portfolio, CTA)
 - `components/layout/` — Layout components (Navbar, Footer)
-- `components/ui/` — UI components (ReturnToTop)
+- `components/ui/` — UI components (ReturnToTop, CookieBanner)
 - `components/providers/` — Context providers (SmoothScrolling)
 - `lib/` — Data and utility functions
 - `public/` — Static assets
@@ -35,8 +35,18 @@ Marketing/portfolio website for GGIT Systems — a strategic tech partner bridgi
 10. CTA / "Ready to build?" (call-to-action with gradient button)
 11. Footer (contact info, social links to GitHub/LinkedIn/Email, services list)
 
+## Mobile Performance (iOS Safari)
+- **`backdrop-blur`**: Removed from all mobile contexts. Desktop-only via `md:backdrop-blur-xl` (Navbar).
+- **`transition-all`**: Replaced globally with specific properties (`transition-colors`, `transition-opacity`, `transition-[width]`, `transition-[opacity,transform]`).
+- **Section glow blurs**: All decorative `blur-[100px+]` divs use `.section-glow` class, hidden on mobile via CSS (`display: none` under 768px).
+- **Hero glow orbs**: Mobile — smaller (300/250px), less blur (80px), slower animation (20s), third orb hidden.
+- **SVG noise texture**: `.bg-noise::before` hidden on mobile. Inline SVG noise removed from service/portfolio cards.
+- **Body grid lines**: Removed from mobile; only rendered on `md:` breakpoint.
+- **`drop-shadow`**: Desktop-only via `md:drop-shadow-[...]` prefix.
+- **Pattern**: Never use `backdrop-blur`, `transition-all`, `drop-shadow`, or large `blur` on mobile. Always scope them to `md:` or use the `.section-glow` class.
+
 ## Brand
-- Colors: `brand-blue` (#2563eb), `brand-cyan` (#06b6d4), dark background (#0a0a0a)
+- Colors: `brand-blue` (#f59e0b amber), `brand-cyan` (#06b6d4 cyan), dark background (#0a0a0a)
 - Cube has 6 faces: THE CORE, THE STRUCTURE, THE BACKBONE, THE SHIELD, THE INTELLIGENCE, THE METHOD
 - Founded 2023, "Cornerstone" brand philosophy
 
