@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { MapPin, Truck, Sparkles } from 'lucide-react'
 
 const aiPrompt = '> Generate a fleet tracking card component with real-time status, route visualization, and ETA. Use React, Tailwind CSS and Lucide icons.'
@@ -78,49 +78,23 @@ function useAnimationLoop() {
   const [promptChars, setPromptChars] = useState(0)
   const [visibleCodeLines, setVisibleCodeLines] = useState(0)
   const [phase, setPhase] = useState(PHASE_PROMPT)
-  const [isWaiting, setIsWaiting] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
+  const isInViewRef = useRef(false)
+  const isWaitingRef = useRef(false)
+  const phaseRef = useRef(PHASE_PROMPT)
+
+  phaseRef.current = phase
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
+      ([entry]) => { isInViewRef.current = entry.isIntersecting },
       { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
-
-  const tick = useCallback(() => {
-    if (!isInView || isWaiting) return
-
-    if (phase === PHASE_PROMPT) {
-      setPromptChars(prev => {
-        if (prev >= aiPrompt.length) {
-          setTimeout(() => setPhase(PHASE_CODE), 600)
-          return prev
-        }
-        return prev + 2
-      })
-    } else if (phase === PHASE_CODE) {
-      setVisibleCodeLines(prev => {
-        if (prev >= codeLines.length) {
-          setPhase(PHASE_DONE)
-          setIsWaiting(true)
-          setTimeout(() => {
-            setPromptChars(0)
-            setVisibleCodeLines(0)
-            setPhase(PHASE_PROMPT)
-            setIsWaiting(false)
-          }, 4000)
-          return prev
-        }
-        return prev + 1
-      })
-    }
-  }, [isInView, isWaiting, phase])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -131,10 +105,59 @@ function useAnimationLoop() {
       return
     }
 
-    const speed = phase === PHASE_PROMPT ? 30 : 120
-    const interval = setInterval(tick, speed)
-    return () => clearInterval(interval)
-  }, [tick, phase])
+    let promptInterval: ReturnType<typeof setInterval> | null = null
+    let codeInterval: ReturnType<typeof setInterval> | null = null
+
+    function startPromptPhase() {
+      if (codeInterval) { clearInterval(codeInterval); codeInterval = null }
+      promptInterval = setInterval(() => {
+        if (!isInViewRef.current || isWaitingRef.current) return
+        setPromptChars(prev => {
+          if (prev >= aiPrompt.length) {
+            if (promptInterval) { clearInterval(promptInterval); promptInterval = null }
+            setTimeout(() => {
+              setPhase(PHASE_CODE)
+              phaseRef.current = PHASE_CODE
+              startCodePhase()
+            }, 600)
+            return prev
+          }
+          return prev + 2
+        })
+      }, 30)
+    }
+
+    function startCodePhase() {
+      codeInterval = setInterval(() => {
+        if (!isInViewRef.current || isWaitingRef.current) return
+        setVisibleCodeLines(prev => {
+          if (prev >= codeLines.length) {
+            if (codeInterval) { clearInterval(codeInterval); codeInterval = null }
+            setPhase(PHASE_DONE)
+            phaseRef.current = PHASE_DONE
+            isWaitingRef.current = true
+            setTimeout(() => {
+              setPromptChars(0)
+              setVisibleCodeLines(0)
+              setPhase(PHASE_PROMPT)
+              phaseRef.current = PHASE_PROMPT
+              isWaitingRef.current = false
+              startPromptPhase()
+            }, 4000)
+            return prev
+          }
+          return prev + 1
+        })
+      }, 120)
+    }
+
+    startPromptPhase()
+
+    return () => {
+      if (promptInterval) clearInterval(promptInterval)
+      if (codeInterval) clearInterval(codeInterval)
+    }
+  }, [])
 
   return { ref, promptChars, visibleCodeLines, phase }
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const codeLines = [
   { indent: 0, text: 'const app = new NestFactory();', color: 'text-gray-300' },
@@ -36,36 +36,20 @@ const techItems = [
 
 function CodeBlock() {
   const [visibleLines, setVisibleLines] = useState(0)
-  const [isWaiting, setIsWaiting] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
+  const isInViewRef = useRef(false)
+  const isWaitingRef = useRef(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
+      ([entry]) => { isInViewRef.current = entry.isIntersecting },
       { threshold: 0.1 }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
-
-  const tick = useCallback(() => {
-    if (!isInView || isWaiting) return
-
-    setVisibleLines(prev => {
-      if (prev >= codeLines.length) {
-        setIsWaiting(true)
-        setTimeout(() => {
-          setVisibleLines(0)
-          setIsWaiting(false)
-        }, 2000)
-        return prev
-      }
-      return prev + 1
-    })
-  }, [isInView, isWaiting])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -74,9 +58,22 @@ function CodeBlock() {
       return
     }
 
-    const interval = setInterval(tick, 200)
+    const interval = setInterval(() => {
+      if (!isInViewRef.current || isWaitingRef.current) return
+      setVisibleLines(prev => {
+        if (prev >= codeLines.length) {
+          isWaitingRef.current = true
+          setTimeout(() => {
+            setVisibleLines(0)
+            isWaitingRef.current = false
+          }, 2000)
+          return prev
+        }
+        return prev + 1
+      })
+    }, 200)
     return () => clearInterval(interval)
-  }, [tick])
+  }, [])
 
   return (
     <div ref={ref} className="bg-[#0d0d0d] border border-white/[0.08] rounded-2xl overflow-hidden font-mono text-sm">
