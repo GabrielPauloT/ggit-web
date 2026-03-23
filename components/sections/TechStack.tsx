@@ -76,14 +76,14 @@ function CodeBlock() {
   }, [])
 
   return (
-    <div ref={ref} className="bg-[#0d0d0d] border border-white/[0.08] rounded-2xl overflow-hidden font-mono text-sm">
+    <div ref={ref} className="bg-[#0d0d0d] border border-white/[0.08] rounded-2xl overflow-hidden font-mono text-[11px] sm:text-sm">
       <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
         <div className="w-3 h-3 rounded-full bg-red-500/60" />
         <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
         <div className="w-3 h-3 rounded-full bg-green-500/60" />
         <span className="text-gray-500 text-xs ml-2">server.ts</span>
       </div>
-      <div className="p-5 h-[360px] overflow-hidden">
+      <div className="p-4 sm:p-5 h-[360px] overflow-hidden overflow-x-auto">
         {codeLines.map((line, i) => (
           <div
             key={i}
@@ -126,7 +126,7 @@ export default function TechStack() {
               <span className="w-10 h-[1px] bg-brand-cyan" />
               <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Under the Hood</h2>
             </div>
-            <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
               Built to scale<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
             </h3>
             <p className="text-gray-400 text-lg leading-relaxed font-light mb-8">

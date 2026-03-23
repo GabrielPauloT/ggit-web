@@ -60,7 +60,7 @@ export default function Process() {
             <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Method</h2>
             <span className="w-10 h-[1px] bg-brand-cyan" />
           </div>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
             From idea to product<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
           </h3>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">

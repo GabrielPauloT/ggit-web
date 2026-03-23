@@ -40,11 +40,11 @@ export default function LiveDemo() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
             Product engineering before<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">software engineering</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
           </h3>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+          <p className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg font-light">
             We don&apos;t start coding in the dark. You see every user click and every system automation before development begins. Full scope predictability.
           </p>
         </motion.div>
@@ -54,7 +54,7 @@ export default function LiveDemo() {
             <div className="mx-16 h-[2px] bg-gradient-to-r from-brand-blue/20 via-brand-cyan/30 to-brand-blue/20" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 relative z-10">
             {flowSteps.map((step, index) => (
               <motion.div
                 key={index}
@@ -70,7 +70,7 @@ export default function LiveDemo() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.15 + 0.5, duration: 0.5 }}
-                    className="absolute -top-5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap"
+                    className="absolute -top-5 left-0 sm:left-1/2 sm:-translate-x-1/2 z-20 max-w-[calc(100%-1rem)] sm:max-w-none sm:whitespace-nowrap"
                   >
                     <div className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue/15 border border-brand-blue/30 rounded-full backdrop-blur-sm">
                       <Bot className="w-3 h-3 text-brand-blue flex-shrink-0" />

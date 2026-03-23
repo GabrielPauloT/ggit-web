@@ -45,7 +45,7 @@ export default function About() {
               <span className="w-10 h-[1px] bg-brand-cyan" />
               <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Story</h2>
             </div>
-            <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
               Not just another dev agency<span className="text-brand-cyan drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
             </h3>
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-6">

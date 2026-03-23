@@ -38,14 +38,14 @@ export default function DirectContact() {
               <span className="w-10 h-[1px] bg-brand-cyan" />
               <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">How We Work</h2>
             </div>
-            <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
               Less noise<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">,</span><br />
               more delivery<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
             </h3>
-            <p className="text-gray-400 text-lg leading-relaxed font-light mb-4">
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-light mb-4">
               The #1 frustration in hiring a dev agency? The telephone game. You brief a PM, who briefs a lead, who briefs a developer — and by the time code gets written, the original vision is lost.
             </p>
-            <p className="text-gray-400 text-lg leading-relaxed font-light">
+            <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-light">
               At GGIT, you talk directly to the people who build your product. From scoping to deployment, your line is always open to the engineers and founders making decisions.
             </p>
           </motion.div>

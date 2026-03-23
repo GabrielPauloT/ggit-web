@@ -52,7 +52,7 @@ export default function Hero() {
               hidden: { opacity: 0, y: 40, filter: "blur(10px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
           >
             GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan drop-shadow-[0_0_30px_rgba(245,158,11,0.4)]">.</span><br className="md:hidden" />SYSTEMS
           </motion.h1>
@@ -62,7 +62,7 @@ export default function Hero() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
+            className="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed font-light px-2"
           >
             Your strategic tech partner. We <span className="text-white font-medium relative inline-block group cursor-default">
               validate
