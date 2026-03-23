@@ -3,6 +3,7 @@ import Hero from '@/components/sections/Hero'
 
 import About from '@/components/sections/About'
 import TechStack from '@/components/sections/TechStack'
+import LiveDemo from '@/components/sections/LiveDemo'
 import DirectContact from '@/components/sections/DirectContact'
 import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
@@ -17,6 +18,7 @@ export default function Home() {
       <Hero />
       <About />
       <TechStack />
+      <LiveDemo />
       <DirectContact />
       <Services />
       <Process />
