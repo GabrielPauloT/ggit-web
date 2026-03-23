@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 }
 
 import ReturnToTop from '@/components/ui/ReturnToTop'
+import CookieBanner from '@/components/ui/CookieBanner'
 
 export default function RootLayout({
   children,
@@ -31,6 +32,7 @@ export default function RootLayout({
         <SmoothScrolling>
           {children}
           <ReturnToTop />
+          <CookieBanner />
         </SmoothScrolling>
       </body>
     </html>
