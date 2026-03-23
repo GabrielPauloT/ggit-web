@@ -1,6 +1,6 @@
 import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
-import Stats from '@/components/sections/Stats'
+
 import About from '@/components/sections/About'
 import TechStack from '@/components/sections/TechStack'
 import DirectContact from '@/components/sections/DirectContact'
@@ -15,7 +15,6 @@ export default function Home() {
     <main className="min-h-screen bg-dark-bg text-white selection:bg-brand-blue/30 selection:text-white">
       <Navbar />
       <Hero />
-      <Stats />
       <About />
       <TechStack />
       <DirectContact />
