@@ -111,8 +111,8 @@ export default function LiveDemo() {
                 </div>
 
                 {index < flowSteps.length - 1 && (
-                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 z-20">
-                    <ArrowRight className="w-4 h-4 text-brand-cyan/40" />
+                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 z-20 drop-shadow-[0_0_6px_rgba(6,182,212,0.6)]">
+                    <ArrowRight className="w-5 h-5 text-brand-cyan" />
                   </div>
                 )}
               </motion.div>
