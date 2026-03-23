@@ -1,278 +1,35 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState, useRef } from 'react'
-import { MapPin, Truck, Sparkles } from 'lucide-react'
+import { Bot, LogIn, CreditCard, LayoutDashboard, Headphones, ArrowRight } from 'lucide-react'
 
-const aiPrompt = '> Generate a fleet tracking card component with real-time status, route visualization, and ETA. Use React, Tailwind CSS and Lucide icons.'
-
-const codeLines = [
-  'import { Badge } from "@/components/ui/badge";',
-  'import { MapPin, Truck } from "lucide-react";',
-  '',
-  'interface RouteProps {',
-  '  id: string;',
-  '  origin: string;',
-  '  destination: string;',
-  "  status: 'in_transit' | 'delivered';",
-  '  driver: string;',
-  '}',
-  '',
-  'export default function ActiveRouteCard(',
-  '  { id, origin, destination, status, driver }',
-  ': RouteProps) {',
-  '  return (',
-  '    <div className="p-6 bg-white rounded-xl',
-  '      border shadow-sm">',
-  '      <div className="flex justify-between">',
-  '        <h3 className="font-semibold">',
-  '          Route #{id}',
-  '        </h3>',
-  '        <Badge variant={',
-  "          status === 'in_transit'",
-  "            ? 'default' : 'secondary'",
-  '        }>',
-  "          {status === 'in_transit'",
-  "            ? 'In Transit' : 'Delivered'}",
-  '        </Badge>',
-  '      </div>',
-  '',
-  '      <div className="flex items-center">',
-  '        <MapPin className="text-blue-500"/>',
-  '        <span>{origin}</span>',
-  '        <div className="h-px w-8 bg-zinc-300"/>',
-  '        <MapPin className="text-emerald-500"/>',
-  '        <span>{destination}</span>',
-  '      </div>',
-  '',
-  '      <div className="flex items-center',
-  '        bg-zinc-50 p-3 rounded-lg">',
-  '        <Truck className="text-zinc-700"/>',
-  '        <div>',
-  '          <p className="font-medium">',
-  '            {driver}',
-  '          </p>',
-  '          <p className="text-emerald-500">',
-  '            ETA: 2h 15m',
-  '          </p>',
-  '        </div>',
-  '      </div>',
-  '    </div>',
-  '  );',
-  '}',
+const flowSteps = [
+  {
+    icon: LogIn,
+    label: 'Onboarding',
+    wireframe: ['Name / Email', 'Company Size', 'Industry Select', '[Continue →]'],
+  },
+  {
+    icon: CreditCard,
+    label: 'Pricing',
+    wireframe: ['Plan Comparison', '── Basic ──', '── Pro ──', '[Subscribe]'],
+    aiBadge: 'AI: Dynamic pricing based on demand',
+  },
+  {
+    icon: LayoutDashboard,
+    label: 'Dashboard',
+    wireframe: ['Fleet Overview', '█████ 82%', '████░ 67%', 'Active Routes: 14'],
+    aiBadge: 'AI: Predictive analytics & alerts',
+  },
+  {
+    icon: Headphones,
+    label: 'Support',
+    wireframe: ['Ticket #4821', 'Priority: High', 'Category: Billing', '[Resolve]'],
+    aiBadge: 'AI: Auto-triage & smart routing',
+  },
 ]
 
-const PHASE_PROMPT = 0
-const PHASE_CODE = 1
-const PHASE_DONE = 2
-
-function getPreviewPhase(codeLine: number) {
-  if (codeLine < 14) return 0
-  if (codeLine < 22) return 1
-  if (codeLine < 32) return 2
-  if (codeLine < 42) return 3
-  return 4
-}
-
-function useAnimationLoop() {
-  const [promptChars, setPromptChars] = useState(0)
-  const [visibleCodeLines, setVisibleCodeLines] = useState(0)
-  const [phase, setPhase] = useState(PHASE_PROMPT)
-  const ref = useRef<HTMLDivElement>(null)
-  const isInViewRef = useRef(false)
-  const isWaitingRef = useRef(false)
-  const phaseRef = useRef(PHASE_PROMPT)
-
-  phaseRef.current = phase
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { isInViewRef.current = entry.isIntersecting },
-      { threshold: 0.1 }
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) {
-      setPromptChars(aiPrompt.length)
-      setVisibleCodeLines(codeLines.length)
-      setPhase(PHASE_DONE)
-      return
-    }
-
-    let promptInterval: ReturnType<typeof setInterval> | null = null
-    let codeInterval: ReturnType<typeof setInterval> | null = null
-
-    function startPromptPhase() {
-      if (codeInterval) { clearInterval(codeInterval); codeInterval = null }
-      promptInterval = setInterval(() => {
-        if (!isInViewRef.current || isWaitingRef.current) return
-        setPromptChars(prev => {
-          if (prev >= aiPrompt.length) {
-            if (promptInterval) { clearInterval(promptInterval); promptInterval = null }
-            setTimeout(() => {
-              setPhase(PHASE_CODE)
-              phaseRef.current = PHASE_CODE
-              startCodePhase()
-            }, 600)
-            return prev
-          }
-          return prev + 2
-        })
-      }, 30)
-    }
-
-    function startCodePhase() {
-      codeInterval = setInterval(() => {
-        if (!isInViewRef.current || isWaitingRef.current) return
-        setVisibleCodeLines(prev => {
-          if (prev >= codeLines.length) {
-            if (codeInterval) { clearInterval(codeInterval); codeInterval = null }
-            setPhase(PHASE_DONE)
-            phaseRef.current = PHASE_DONE
-            isWaitingRef.current = true
-            setTimeout(() => {
-              setPromptChars(0)
-              setVisibleCodeLines(0)
-              setPhase(PHASE_PROMPT)
-              phaseRef.current = PHASE_PROMPT
-              isWaitingRef.current = false
-              startPromptPhase()
-            }, 4000)
-            return prev
-          }
-          return prev + 1
-        })
-      }, 120)
-    }
-
-    startPromptPhase()
-
-    return () => {
-      if (promptInterval) clearInterval(promptInterval)
-      if (codeInterval) clearInterval(codeInterval)
-    }
-  }, [])
-
-  return { ref, promptChars, visibleCodeLines, phase }
-}
-
-function CodeEditor({ promptChars, visibleCodeLines, phase }: {
-  promptChars: number
-  visibleCodeLines: number
-  phase: number
-}) {
-  return (
-    <div className="bg-[#0d0d0d] border border-white/[0.08] rounded-2xl overflow-hidden font-mono text-xs sm:text-sm h-full flex flex-col">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-        <div className="w-3 h-3 rounded-full bg-red-500/60" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
-        <div className="w-3 h-3 rounded-full bg-green-500/60" />
-        <span className="text-gray-500 text-xs ml-2">ActiveRouteCard.tsx</span>
-      </div>
-
-      <div className="px-4 py-3 border-b border-white/[0.06] bg-brand-blue/[0.03] flex items-center gap-2 min-h-[44px]">
-        <Sparkles className="w-4 h-4 text-brand-blue flex-shrink-0" />
-        <span className="text-brand-cyan text-xs">
-          {aiPrompt.slice(0, promptChars)}
-          {phase === PHASE_PROMPT && promptChars < aiPrompt.length && (
-            <span className="inline-block w-1.5 h-3.5 bg-brand-cyan animate-pulse ml-0.5 align-middle" />
-          )}
-        </span>
-      </div>
-
-      <div className="p-4 flex-1 overflow-hidden">
-        {codeLines.map((line, i) => {
-          const isKeyword = line.includes('import') || line.includes('export') || line.includes('interface') || line.includes('return')
-          const isType = line.includes('string') || line.includes('RouteProps')
-          const isString = line.includes("'") || line.includes('"')
-
-          let colorClass = 'text-gray-300'
-          if (!line) colorClass = ''
-          else if (isKeyword) colorClass = 'text-purple-400'
-          else if (isType) colorClass = 'text-brand-cyan'
-          else if (isString) colorClass = 'text-green-400'
-
-          return (
-            <div
-              key={i}
-              className={`leading-5 transition-all duration-200 ${i < visibleCodeLines ? 'opacity-100' : 'opacity-0'}`}
-            >
-              <span className="text-gray-700 select-none inline-block w-7 text-right mr-3">
-                {line !== undefined ? i + 1 : ''}
-              </span>
-              <span className={colorClass}>{line}</span>
-            </div>
-          )
-        })}
-        {phase === PHASE_DONE && (
-          <div className="mt-1">
-            <span className="text-gray-700 select-none inline-block w-7 text-right mr-3">&gt;</span>
-            <span className="inline-block w-2 h-4 bg-brand-blue animate-pulse" />
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function PreviewCard({ previewPhase }: { previewPhase: number }) {
-  return (
-    <div className="bg-white rounded-xl border border-zinc-200 shadow-sm overflow-hidden">
-      <div className={`p-6 transition-all duration-500 ${previewPhase >= 1 ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex justify-between items-center mb-5">
-          <h3 className={`text-lg font-semibold text-zinc-900 transition-all duration-500 ${previewPhase >= 1 ? 'opacity-100' : 'opacity-0'}`}>
-            Route #BRZ-8492
-          </h3>
-          <span className={`px-3 py-1 text-xs font-medium rounded-full bg-blue-600 text-white transition-all duration-500 ${previewPhase >= 1 ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
-            In Transit
-          </span>
-        </div>
-
-        <div className={`flex items-center space-x-3 mb-6 text-sm text-zinc-500 transition-all duration-700 ${previewPhase >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-          <div className="flex items-center">
-            <MapPin className="w-4 h-4 mr-1 text-blue-500" />
-            <span>Melbourne, VIC</span>
-          </div>
-          <div className="h-px w-8 bg-zinc-300" />
-          <div className="flex items-center">
-            <MapPin className="w-4 h-4 mr-1 text-emerald-500" />
-            <span>Sydney, NSW</span>
-          </div>
-        </div>
-
-        <div className={`flex items-center space-x-3 bg-zinc-50 p-3 rounded-lg transition-all duration-700 ${previewPhase >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-          <Truck className="w-5 h-5 text-zinc-700" />
-          <div>
-            <p className="text-sm font-medium text-zinc-900">Carlos Silva</p>
-            <p className="text-xs text-emerald-600 font-medium">ETA: 2h 15m</p>
-          </div>
-        </div>
-      </div>
-
-      {previewPhase < 1 && (
-        <div className="p-6 space-y-4 animate-pulse">
-          <div className="flex justify-between">
-            <div className="h-5 w-32 bg-zinc-200 rounded" />
-            <div className="h-5 w-20 bg-zinc-200 rounded-full" />
-          </div>
-          <div className="h-4 w-48 bg-zinc-100 rounded" />
-          <div className="h-12 w-full bg-zinc-100 rounded-lg" />
-        </div>
-      )}
-    </div>
-  )
-}
-
 export default function LiveDemo() {
-  const { ref, promptChars, visibleCodeLines, phase } = useAnimationLoop()
-  const previewPhase = phase === PHASE_DONE ? 4 : (phase === PHASE_CODE ? getPreviewPhase(visibleCodeLines) : -1)
-
   return (
     <section id="live-demo" className="pb-32 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -283,51 +40,84 @@ export default function LiveDemo() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-            Startup speed<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span> Enterprise quality<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
+          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 tracking-tight">
+            Product engineering before<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">software engineering</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
           </h3>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
-            We use AI in our development workflow to go from idea to interface in record time. Less boilerplate, more focus on business logic and scalability.
+            We don&apos;t start coding in the dark. You see every user click and every system automation before development begins. Full scope predictability.
           </p>
         </motion.div>
 
-        <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="min-h-[500px]"
-          >
-            <CodeEditor promptChars={promptChars} visibleCodeLines={visibleCodeLines} phase={phase} />
-          </motion.div>
+        <div className="relative max-w-6xl mx-auto">
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 -translate-y-1/2 pointer-events-none z-0">
+            <div className="mx-16 h-[2px] bg-gradient-to-r from-brand-blue/20 via-brand-cyan/30 to-brand-blue/20" />
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="flex flex-col"
-          >
-            <div className="bg-[#f8f9fa] border border-white/[0.08] rounded-2xl overflow-hidden flex-1 flex flex-col">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-200 bg-white">
-                <div className="w-3 h-3 rounded-full bg-red-400/60" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400/60" />
-                <div className="w-3 h-3 rounded-full bg-green-400/60" />
-                <div className="flex-1 mx-4">
-                  <div className="bg-zinc-100 rounded-md px-3 py-1 text-xs text-zinc-400 text-center">
-                    localhost:3000/dashboard
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+            {flowSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="relative group"
+              >
+                {step.aiBadge && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.5, duration: 0.5 }}
+                    className="absolute -top-5 left-1/2 -translate-x-1/2 z-20 whitespace-nowrap"
+                  >
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-brand-blue/15 border border-brand-blue/30 rounded-full backdrop-blur-sm">
+                      <Bot className="w-3 h-3 text-brand-blue flex-shrink-0" />
+                      <span className="text-[10px] sm:text-[11px] text-brand-cyan font-medium">{step.aiBadge}</span>
+                    </div>
+                  </motion.div>
+                )}
+
+                <div className="bg-[#0d0d0d] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-brand-blue/20 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.05)]">
+                  <div className="flex items-center justify-between px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                    <div className="flex items-center gap-2">
+                      <step.icon className="w-4 h-4 text-gray-500 group-hover:text-brand-cyan transition-colors duration-300" />
+                      <span className="text-gray-400 text-xs font-medium group-hover:text-gray-300 transition-colors">{step.label}</span>
+                    </div>
+                    <span className="text-gray-700 text-[10px] font-mono">0{index + 1}</span>
+                  </div>
+
+                  <div className="p-4 space-y-2.5 font-mono text-xs min-h-[140px]">
+                    {step.wireframe.map((line, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.15 + i * 0.1 + 0.3, duration: 0.4 }}
+                        className={`${
+                          line.startsWith('[')
+                            ? 'text-brand-blue border border-brand-blue/20 rounded-md px-2 py-1.5 text-center bg-brand-blue/[0.05] hover:bg-brand-blue/10 transition-colors cursor-default'
+                            : line.startsWith('█') || line.startsWith('─')
+                            ? 'text-gray-600'
+                            : 'text-gray-400'
+                        }`}
+                      >
+                        {line}
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
-              </div>
 
-              <div className="p-8 flex-1 flex items-center justify-center">
-                <div className="w-full max-w-sm">
-                  <PreviewCard previewPhase={previewPhase} />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+                {index < flowSteps.length - 1 && (
+                  <div className="hidden lg:flex absolute top-1/2 -right-3 -translate-y-1/2 z-20">
+                    <ArrowRight className="w-4 h-4 text-brand-cyan/40" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
