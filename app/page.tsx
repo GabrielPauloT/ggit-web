@@ -2,6 +2,8 @@ import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/Hero'
 import Stats from '@/components/sections/Stats'
 import About from '@/components/sections/About'
+import TechStack from '@/components/sections/TechStack'
+import DirectContact from '@/components/sections/DirectContact'
 import Services from '@/components/sections/Services'
 import Process from '@/components/sections/Process'
 import Portfolio from '@/components/sections/Portfolio'
@@ -15,6 +17,8 @@ export default function Home() {
       <Hero />
       <Stats />
       <About />
+      <TechStack />
+      <DirectContact />
       <Services />
       <Process />
       <Portfolio />
