@@ -43,34 +43,34 @@ export default function LanguageSelector() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:border-white/20 transition-colors duration-300 cursor-pointer"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 cursor-pointer text-gray-400 hover:text-white transition-colors duration-300 group"
       >
-        <span className="text-base leading-none">{selected.flag}</span>
-        <span className="text-xs font-medium text-gray-300">{selected.code}</span>
-        <ChevronDown className={`w-3 h-3 text-gray-500 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-sm leading-none">{selected.flag}</span>
+        <span className="text-xs font-mono tracking-wide">{selected.code}</span>
+        <ChevronDown className={`w-3 h-3 text-gray-600 group-hover:text-brand-cyan transition-[transform,color] duration-200 ${isOpen ? 'rotate-180 text-brand-cyan' : ''}`} />
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -4, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -4, scale: 0.95 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full right-0 mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.5)] min-w-[100px] z-50"
+            className="absolute top-full right-0 mt-3 bg-[#111] border border-white/[0.08] rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.6)] min-w-[90px] z-50"
           >
             {languages.map((lang) => (
               <button
                 key={lang.code}
                 onClick={() => handleSelect(lang)}
-                className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-left cursor-pointer transition-colors duration-200 ${
+                className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 text-left cursor-pointer transition-colors duration-200 ${
                   selected.code === lang.code
-                    ? 'bg-white/[0.06] text-white'
-                    : 'text-gray-400 hover:bg-white/[0.04] hover:text-white'
+                    ? 'text-brand-cyan bg-brand-cyan/[0.06]'
+                    : 'text-gray-500 hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
-                <span className="text-base leading-none">{lang.flag}</span>
-                <span className="text-xs font-medium">{lang.code}</span>
+                <span className="text-sm leading-none">{lang.flag}</span>
+                <span className="text-xs font-mono tracking-wide">{lang.code}</span>
               </button>
             ))}
           </motion.div>
