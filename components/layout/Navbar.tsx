@@ -1,18 +1,21 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useLenis } from 'lenis/react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import LanguageSelector from '@/components/ui/LanguageSelector'
 
+const sectionIds = ['services', 'projects', 'about', 'contact']
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActiveSection] = useState<string | null>(null)
   const lenis = useLenis()
+  const isClickScrolling = useRef(false)
 
-  // Handle scroll effect for glassmorphism
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
@@ -21,34 +24,73 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    const visibleSections = new Map<string, number>()
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(id, entry.intersectionRatio)
+          } else {
+            visibleSections.delete(id)
+          }
+
+          if (isClickScrolling.current) return
+
+          let best: string | null = null
+          let bestRatio = 0
+          visibleSections.forEach((ratio, sId) => {
+            if (ratio > bestRatio) {
+              bestRatio = ratio
+              best = sId
+            }
+          })
+          setActiveSection(best)
+        },
+        { threshold: [0, 0.2, 0.4, 0.6], rootMargin: '-80px 0px -30% 0px' }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     
-    // Smooth scroll to top
     if (href === '/') {
       lenis?.scrollTo(0, { duration: 2.5 })
       setIsOpen(false)
+      setActiveSection(null)
       return
     }
 
-    // Scroll to section
     if (href.startsWith('#')) {
+      const sectionId = href.slice(1)
+      setActiveSection(sectionId)
+      isClickScrolling.current = true
+
       const target = document.querySelector(href) as HTMLElement
       if (target && lenis) {
-        const targetTop = target.getBoundingClientRect().top + window.scrollY + -80 // inclusive of offset
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - 80
         const currentScroll = window.scrollY
         const distance = Math.abs(currentScroll - targetTop)
-        
-        // Dynamic duration: 1.2s minimum, caps at 2.5s. 
-        // Scales based on distance (slower for longer scrolls)
         const duration = Math.min(Math.max(distance / 1500, 1.2), 2.5)
 
         lenis.scrollTo(target, { 
           offset: -80, 
           duration: duration,
-          // easeInOutQuart: steep acceleration/deceleration curve for premium feel
-          easing: (t) => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2
+          easing: (t) => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2,
+          onComplete: () => { isClickScrolling.current = false }
         })
+      } else {
+        setTimeout(() => { isClickScrolling.current = false }, 2000)
       }
     }
     setIsOpen(false)
@@ -71,7 +113,6 @@ export default function Navbar() {
         }`}
       >
         <div className="flex justify-between items-center">
-        {/* Logo */}
         <Link 
           href="/" 
           className="text-2xl font-bold tracking-tighter group flex items-baseline cursor-pointer"
@@ -81,19 +122,26 @@ export default function Navbar() {
           <span className="text-brand-blue group-hover:text-brand-cyan transition-colors ml-0.5">.</span>
         </Link>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="text-sm font-medium text-gray-400 hover:text-brand-cyan transition-colors relative group cursor-pointer"
-            >
-              {item.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-cyan transition-[width] duration-300 group-hover:w-full" />
-            </a>
-          ))}
+          {navLinks.map((item) => {
+            const sectionId = item.href.slice(1)
+            const isActive = activeSection === sectionId
+            return (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className={`text-sm font-medium relative cursor-pointer transition-colors duration-300 ${
+                  isActive ? 'text-brand-cyan' : 'text-gray-400 hover:text-brand-cyan'
+                }`}
+              >
+                {item.name}
+                <span className={`absolute -bottom-1 left-0 h-[1px] bg-brand-cyan transition-[width] duration-300 ${
+                  isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                }`} />
+              </a>
+            )
+          })}
           
           <LanguageSelector />
 
@@ -106,7 +154,6 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button
           className="md:hidden cursor-pointer text-white hover:text-brand-blue transition-colors"
           onClick={() => setIsOpen(!isOpen)}
@@ -116,7 +163,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -126,16 +172,22 @@ export default function Navbar() {
             className="absolute top-full left-0 right-0 mt-2 bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden md:hidden shadow-[0_8px_32px_rgba(0,0,0,0.6)]"
           >
             <div className="flex flex-col p-6 gap-4">
-              {navLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-lg font-medium text-gray-300 hover:text-brand-blue py-2 border-b border-white/5 cursor-pointer"
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navLinks.map((item) => {
+                const sectionId = item.href.slice(1)
+                const isActive = activeSection === sectionId
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={`text-lg font-medium py-2 border-b border-white/5 cursor-pointer transition-colors ${
+                      isActive ? 'text-brand-cyan' : 'text-gray-300 hover:text-brand-blue'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                )
+              })}
               <div className="flex items-center justify-between mt-2">
                 <LanguageSelector />
                 <button 
