@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLenis } from 'lenis/react'
 import { Menu, X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import LanguageSelector from '@/components/ui/LanguageSelector'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -94,6 +95,8 @@ export default function Navbar() {
             </a>
           ))}
           
+          <LanguageSelector />
+
           <button 
             onClick={(e) => handleNavClick(e as any, '#contact')}
             className="group relative cursor-pointer bg-brand-blue/10 border border-brand-blue/30 text-brand-cyan hover:text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-300 hover:border-brand-cyan hover:bg-brand-cyan/20 overflow-hidden"
@@ -133,9 +136,15 @@ export default function Navbar() {
                   {item.name}
                 </a>
               ))}
-              <button className="mt-4 w-full cursor-pointer bg-brand-blue text-white py-3 rounded-lg font-semibold shadow-lg shadow-brand-blue/20">
-                Start Project
-              </button>
+              <div className="flex items-center justify-between mt-2">
+                <LanguageSelector />
+                <button 
+                  onClick={(e) => { handleNavClick(e as any, '#contact'); }}
+                  className="cursor-pointer bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold"
+                >
+                  Start Project
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
