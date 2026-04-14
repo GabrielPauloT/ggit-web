@@ -80,6 +80,7 @@ export default function Services() {
               className="group cursor-pointer bg-white/[0.02] border border-white/[0.05] hover:border-brand-blue/50 hover:bg-white/[0.04] rounded-3xl transition-colors duration-500 relative overflow-hidden flex flex-col"
             >
               <div className={`h-32 bg-gradient-to-br ${service.gradient} relative flex items-center justify-center border-b border-white/[0.05]`}>
+                <div className="hidden md:block absolute inset-0 opacity-30 mix-blend-overlay pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
                 <div className="p-4 bg-black/40 border border-white/10 rounded-2xl group-hover:scale-110 group-hover:border-brand-blue/40 transition-transform duration-500 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
                   <service.icon className="w-8 h-8 text-brand-blue group-hover:text-brand-cyan transition-colors duration-500" />
                 </div>
