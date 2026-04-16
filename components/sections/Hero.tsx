@@ -9,60 +9,44 @@ const slotWords = ['SYSTEMS', 'MVP', 'POC', 'VALUE', 'TTM']
 
 function SlotMachine() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [isSpinning, setIsSpinning] = useState(false)
-  const targetRef = useRef(1)
-  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  const startTimer = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slotWords.length)
+    }, 4000)
+  }
 
   useEffect(() => {
-    const clearTimers = () => {
-      timersRef.current.forEach(clearTimeout)
-      timersRef.current = []
-    }
-
-    const cycle = () => {
-      setIsSpinning(true)
-      clearTimers()
-
-      const totalSpins = 3 + Math.floor(Math.random() * 2)
-      const target = targetRef.current
-
-      for (let i = 0; i < totalSpins; i++) {
-        const delay = i < totalSpins - 2 ? 500 * (i + 1) : i === totalSpins - 2 ? 500 * (totalSpins - 2) + 700 : 500 * (totalSpins - 2) + 1200
-        const id = setTimeout(() => {
-          if (i < totalSpins - 1) {
-            setCurrentIndex((prev) => (prev + 1) % slotWords.length)
-          } else {
-            setCurrentIndex(target)
-            setIsSpinning(false)
-            targetRef.current = (target + 1) % slotWords.length
-          }
-        }, delay)
-        timersRef.current.push(id)
-      }
-    }
-
-    const scheduleId = setTimeout(cycle, 3000)
-    timersRef.current.push(scheduleId)
-    const interval = setInterval(cycle, 6000)
-
+    startTimer()
     return () => {
-      clearInterval(interval)
-      clearTimers()
+      if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [])
 
+  const handleClick = () => {
+    setCurrentIndex((prev) => (prev + 1) % slotWords.length)
+    startTimer()
+  }
+
   return (
-    <span className="inline-flex relative overflow-hidden align-bottom">
+    <span
+      className="inline-flex relative overflow-hidden align-bottom cursor-pointer select-none"
+      onClick={handleClick}
+    >
       <span className="invisible font-bold">SYSTEMS</span>
       <AnimatePresence mode="popLayout">
         <motion.span
-          key={`${currentIndex}-${isSpinning}`}
-          initial={{ y: '100%', opacity: 0 }}
-          animate={{ y: '0%', opacity: 1 }}
-          exit={{ y: '-100%', opacity: 0 }}
+          key={currentIndex}
+          initial={{ y: '100%', filter: 'blur(8px)', opacity: 0 }}
+          animate={{ y: '0%', filter: 'blur(0px)', opacity: 1 }}
+          exit={{ y: '-100%', filter: 'blur(8px)', opacity: 0 }}
           transition={{
-            duration: isSpinning ? 0.08 : 0.4,
-            ease: isSpinning ? 'linear' : [0.16, 1, 0.3, 1],
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            mass: 2.5,
           }}
           className="absolute inset-0 flex items-center justify-center md:justify-start font-bold"
         >
