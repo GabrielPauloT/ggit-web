@@ -23,11 +23,11 @@ function SlotMachine() {
       setIsSpinning(true)
       clearTimers()
 
-      const totalSpins = 6 + Math.floor(Math.random() * 3)
+      const totalSpins = 3 + Math.floor(Math.random() * 2)
       const target = targetRef.current
 
       for (let i = 0; i < totalSpins; i++) {
-        const delay = i < totalSpins - 2 ? 150 * (i + 1) : i === totalSpins - 2 ? 150 * (totalSpins - 2) + 250 : 150 * (totalSpins - 2) + 550
+        const delay = i < totalSpins - 2 ? 500 * (i + 1) : i === totalSpins - 2 ? 500 * (totalSpins - 2) + 700 : 500 * (totalSpins - 2) + 1200
         const id = setTimeout(() => {
           if (i < totalSpins - 1) {
             setCurrentIndex((prev) => (prev + 1) % slotWords.length)
@@ -43,7 +43,7 @@ function SlotMachine() {
 
     const scheduleId = setTimeout(cycle, 3000)
     timersRef.current.push(scheduleId)
-    const interval = setInterval(cycle, 5500)
+    const interval = setInterval(cycle, 6000)
 
     return () => {
       clearInterval(interval)
