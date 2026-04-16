@@ -1,8 +1,79 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { useLenis } from 'lenis/react'
+
+const slotWords = ['SYSTEMS', 'MVP', 'POC', 'VALUE', 'TTM']
+
+function SlotMachine() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isSpinning, setIsSpinning] = useState(false)
+  const targetRef = useRef(1)
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([])
+
+  useEffect(() => {
+    const clearTimers = () => {
+      timersRef.current.forEach(clearTimeout)
+      timersRef.current = []
+    }
+
+    const cycle = () => {
+      setIsSpinning(true)
+      clearTimers()
+
+      const totalSpins = 6 + Math.floor(Math.random() * 3)
+      const target = targetRef.current
+
+      for (let i = 0; i < totalSpins; i++) {
+        const delay = i < totalSpins - 2 ? 80 * (i + 1) : i === totalSpins - 2 ? 80 * (totalSpins - 2) + 150 : 80 * (totalSpins - 2) + 400
+        const id = setTimeout(() => {
+          if (i < totalSpins - 1) {
+            setCurrentIndex((prev) => (prev + 1) % slotWords.length)
+          } else {
+            setCurrentIndex(target)
+            setIsSpinning(false)
+            targetRef.current = (target + 1) % slotWords.length
+          }
+        }, delay)
+        timersRef.current.push(id)
+      }
+    }
+
+    const scheduleId = setTimeout(cycle, 2500)
+    timersRef.current.push(scheduleId)
+    const interval = setInterval(cycle, 4000)
+
+    return () => {
+      clearInterval(interval)
+      clearTimers()
+    }
+  }, [])
+
+  return (
+    <span className="inline-flex relative overflow-hidden align-bottom">
+      <span className="invisible font-bold">SYSTEMS</span>
+      <AnimatePresence mode="popLayout">
+        <motion.span
+          key={`${currentIndex}-${isSpinning}`}
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{
+            duration: isSpinning ? 0.08 : 0.4,
+            ease: isSpinning ? 'linear' : [0.16, 1, 0.3, 1],
+          }}
+          className="absolute inset-0 flex items-center justify-center md:justify-start font-bold"
+        >
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">
+            {slotWords[currentIndex]}
+          </span>
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
 
 export default function Hero() {
   const lenis = useLenis()
@@ -22,6 +93,7 @@ export default function Hero() {
       })
     }
   }
+
   return (
     <section id="home" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-noise">
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -44,7 +116,7 @@ export default function Hero() {
               },
             },
           }}
-          className="max-w-4xl"
+          className="max-w-5xl"
         >
 
           <motion.h1 
@@ -52,9 +124,9 @@ export default function Hero() {
               hidden: { opacity: 0, y: 40 },
               visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }
             }}
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-bold tracking-tighter mb-8 text-white leading-none whitespace-nowrap"
           >
-            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span><br className="md:hidden" />SYSTEMS
+            GGIT<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span><SlotMachine />
           </motion.h1>
 
           <motion.p 
