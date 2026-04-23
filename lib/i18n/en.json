@@ -1,0 +1,119 @@
+{
+  "hero": {
+    "tagline": "You focus on the business. We",
+    "taglineHighlight": "build",
+    "taglineEnd": "the product.",
+    "subtitle": "For founders who need a technical partner, not another agency.",
+    "cta": "Let's Talk",
+    "ctaSecondary": "How We Work",
+    "scroll": "Scroll"
+  },
+  "howWeWork": {
+    "label": "How We Work",
+    "title1": "Not an agency",
+    "title2": "Not a freelancer",
+    "subtitle": "You've probably been burned before. Here's how working with us is structurally different.",
+    "bottomTagline": "We're a founder-led technical partner. Same team from day one to scale.",
+    "headers": {
+      "freelancer": "Freelancer",
+      "agency": "Agency",
+      "ggit": "GGIT"
+    },
+    "rows": [
+      {
+        "category": "Who builds your product?",
+        "freelancer": "One person (disappears mid-project)",
+        "agency": "Junior devs you never meet",
+        "ggit": "Founders & senior engineers — directly"
+      },
+      {
+        "category": "Communication",
+        "freelancer": "Async messages, days to reply",
+        "agency": "Account manager relays your words",
+        "ggit": "Direct line to the people writing code"
+      },
+      {
+        "category": "What if the idea is bad?",
+        "freelancer": "Builds whatever you ask",
+        "agency": "Builds whatever you pay for",
+        "ggit": "We tell you before you waste money"
+      },
+      {
+        "category": "Timezone & availability",
+        "freelancer": "Their schedule, not yours",
+        "agency": "9-5 in their timezone",
+        "ggit": "AU + BR coverage — progress while you sleep"
+      },
+      {
+        "category": "AI-accelerated delivery",
+        "freelancer": "Maybe uses Copilot",
+        "agency": "Traditional workflows",
+        "ggit": "AI-native process: faster, leaner, cheaper"
+      },
+      {
+        "category": "After launch?",
+        "freelancer": "Gone. Good luck.",
+        "agency": "New contract, new team",
+        "ggit": "Same team scales with you"
+      }
+    ]
+  },
+  "services": {
+    "label": "What We Do",
+    "title": "Your stage",
+    "titleEnd": "your solution",
+    "subtitle": "We don't sell hours or headcount. We meet you where you are and deliver what your business actually needs right now.",
+    "items": [
+      {
+        "title": "Discovery & Strategy",
+        "subtitle": "You have an idea — we make it buildable",
+        "description": "You know the problem you want to solve but not how to build it. We define your MVP scope, recommend the right tech stack, estimate costs, and deliver a clear roadmap your team (or investors) can trust.",
+        "deliverables": ["MVP Scope Definition", "Tech Stack Recommendation", "Cost & Timeline Estimate", "Investor-Ready Roadmap"]
+      },
+      {
+        "title": "MVP Build",
+        "subtitle": "From zero to working product — fast",
+        "description": "We build your first product in weeks, not months. No-code, low-code, or custom — whatever gets you to market fastest. You get a real product to put in front of users and investors.",
+        "deliverables": ["Working Product", "User Testing Ready", "Deployment & Hosting", "Iteration Support"]
+      },
+      {
+        "title": "Fractional CTO",
+        "subtitle": "Technical leadership without the full-time cost",
+        "description": "Ongoing strategic partnership. We make architecture decisions, oversee development, manage your dev team, and translate tech into business language for your stakeholders.",
+        "deliverables": ["Architecture Decisions", "Dev Team Oversight", "Sprint Planning", "Investor & Stakeholder Communication"]
+      },
+      {
+        "title": "Scale & Migrate",
+        "subtitle": "Your MVP worked — now make it handle growth",
+        "description": "When your product outgrows its initial architecture, we re-engineer for scale. Migrate from no-code to custom, optimize performance, and build infrastructure that handles real traffic.",
+        "deliverables": ["No-Code to Custom Migration", "Performance Optimization", "Cloud Infrastructure", "AI & Automation Integration"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Let's figure out your next step",
+    "subtitle": "Book a free 30-minute call. No pitch, no pressure — just an honest conversation about what your startup needs right now.",
+    "button": "Book a Discovery Call"
+  },
+  "footer": {
+    "description": "You focus on the business. We build the product. A founder-led technical partner bridging Australia and Brazil.",
+    "servicesTitle": "Services",
+    "contactTitle": "Contact",
+    "rights": "GGIT Systems. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "nav": {
+    "howWeWork": "How We Work",
+    "services": "Services",
+    "contact": "Contact",
+    "letsTalk": "Let's Talk",
+    "startProject": "Start Project"
+  },
+  "cookie": {
+    "title": "Your privacy matters",
+    "description": "We use cookies to improve your browsing experience, analyze site traffic, and personalize content. You can choose to accept or reject non-essential cookies.",
+    "accept": "Accept",
+    "reject": "Reject"
+  }
+}

@@ -1,30 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MapPin, Lightbulb, TrendingUp, BrainCircuit } from 'lucide-react'
-import InteractiveCube from '@/components/3d/InteractiveCube'
+import { Linkedin, Github, MapPin, Calendar, Award } from 'lucide-react'
+import Image from 'next/image'
 
-const pillars = [
-  {
-    icon: Lightbulb,
-    title: 'Validate First',
-    description: 'Too many startups burn months building the wrong thing. We validate your hypothesis with the leanest possible solution before committing to full-scale development.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Scale When Ready',
-    description: 'From no-code prototypes to fully custom high-code architecture — we match the technology to your business stage, so budget and time are never barriers to innovation.',
-  },
-  {
-    icon: BrainCircuit,
-    title: 'AI-Driven',
-    description: 'We identify where Artificial Intelligence can cut operational costs — from automating repetitive tasks to predictive analytics in dashboards. AI is our ally, not a buzzword.',
-  },
-  {
-    icon: MapPin,
-    title: 'Australia–Brazil Bridge',
-    description: 'Born from a union of minds across two continents, we bring together Australian market insight and Brazilian engineering talent to deliver world-class products.',
-  },
+const credentials = [
+  { icon: Calendar, text: '6+ years in software engineering' },
+  { icon: MapPin, text: 'Melbourne, AU — Brazilian-born' },
+  { icon: Award, text: 'Microsoft & AWS community member' },
 ]
 
 export default function About() {
@@ -34,66 +17,131 @@ export default function About() {
       <div className="section-glow absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-brand-cyan/[0.03] rounded-full blur-[100px]" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="flex items-center gap-2 justify-center mb-4">
+            <span className="w-10 h-[1px] bg-brand-cyan" />
+            <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Who We Are</h2>
+            <span className="w-10 h-[1px] bg-brand-cyan" />
+          </div>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+            Founder-led<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span> Builder-first<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
+          </h3>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">
+            You deal directly with the person who built this company — not a sales team, not an account manager.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
+          {/* Photo side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
+            className="relative"
           >
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-10 h-[1px] bg-brand-cyan" />
-              <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">Our Story</h2>
+            <div className="relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[3/4] max-w-sm mx-auto lg:mx-0">
+              <Image
+                src="/founder-portrait.jpg"
+                alt="Gabriel Gimenes Alencar — Founder of GGIT Systems"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 400px"
+                priority
+              />
+              {/* Gradient overlay at bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
-            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
-              Not just another dev agency<span className="text-brand-cyan md:drop-shadow-[0_0_15px_rgba(6,182,212,0.6)]">.</span>
-            </h3>
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light mb-6">
-              We noticed a frustrating pattern — startups spending massive amounts of money and months of development on overly complex solutions before even validating if users actually wanted the product.
-            </p>
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed font-light">
-              We decided to change that. GGIT Systems was built to stop "just writing code" and start building viable businesses.
-            </p>
-            <p className="text-gray-500 text-sm font-mono tracking-wide mt-8">
-              Founded in 2023 — Built on faith, resilience, and an unshakable foundation.
-            </p>
+
+            {/* Microsoft badge - floating */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="absolute -bottom-4 -right-4 lg:right-auto lg:-left-4 bg-[#111] border border-white/[0.08] rounded-2xl p-3 shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
+            >
+              <div className="relative w-48 h-32 rounded-xl overflow-hidden">
+                <Image
+                  src="/founder-microsoft.jpg"
+                  alt="Gabriel at Microsoft event"
+                  fill
+                  className="object-cover"
+                  sizes="192px"
+                />
+              </div>
+            </motion.div>
           </motion.div>
 
+          {/* Bio side */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden bg-white/[0.01] border border-white/[0.05]"
           >
-            <InteractiveCube />
-          </motion.div>
-        </div>
+            <div className="mb-2">
+              <h4 className="text-2xl md:text-3xl font-bold text-white">Gabriel Gimenes Alencar</h4>
+              <p className="text-brand-cyan font-mono text-sm mt-1">Founder & CTO</p>
+            </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {pillars.map((pillar, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="group p-8 bg-white/[0.02] border border-white/[0.05] hover:border-brand-blue/40 rounded-3xl transition-colors duration-500 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 via-transparent to-brand-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-              
-              <div className="mb-6 p-4 bg-brand-blue/[0.05] border border-brand-blue/20 w-fit rounded-2xl group-hover:bg-brand-blue/15 group-hover:border-brand-blue/40 transition-colors duration-500 relative z-10">
-                <pillar.icon className="w-7 h-7 text-brand-blue group-hover:text-brand-cyan transition-colors duration-500" />
-              </div>
-              
-              <h4 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-cyan transition-colors relative z-10">
-                {pillar.title}
-              </h4>
-              <p className="text-gray-400 leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-500 relative z-10">
-                {pillar.description}
-              </p>
-            </motion.div>
-          ))}
+            <div className="flex gap-3 mb-8 mt-4">
+              <a
+                href="https://www.linkedin.com/company/ggit-systems"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="p-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl hover:border-brand-blue/40 hover:bg-brand-blue/10 transition-colors duration-300"
+              >
+                <Linkedin className="w-4 h-4 text-gray-400 hover:text-brand-cyan" />
+              </a>
+              <a
+                href="https://github.com/ggit-systems"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="p-2.5 bg-white/[0.04] border border-white/[0.08] rounded-xl hover:border-brand-blue/40 hover:bg-brand-blue/10 transition-colors duration-300"
+              >
+                <Github className="w-4 h-4 text-gray-400 hover:text-brand-cyan" />
+              </a>
+            </div>
+
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light mb-4">
+              I noticed a frustrating pattern — startups spending massive amounts of money and months of development on overly complex solutions before even validating if users actually wanted the product.
+            </p>
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed font-light mb-8">
+              I built GGIT Systems to change that. To stop "just writing code" and start building viable businesses. When you work with us, you work with me — directly.
+            </p>
+
+            {/* Credentials */}
+            <div className="space-y-3">
+              {credentials.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="p-2 bg-brand-blue/[0.06] border border-brand-blue/15 rounded-lg">
+                    <item.icon className="w-4 h-4 text-brand-blue" />
+                  </div>
+                  <span className="text-gray-300 text-sm">{item.text}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-gray-600 text-xs font-mono tracking-wide mt-8">
+              Founded in 2023 — Melbourne, Australia
+            </p>
+          </motion.div>
         </div>
       </div>
     </section>

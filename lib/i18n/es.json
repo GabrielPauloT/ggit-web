@@ -1,0 +1,119 @@
+{
+  "hero": {
+    "tagline": "Tú te enfocas en el negocio. Nosotros",
+    "taglineHighlight": "construimos",
+    "taglineEnd": "el producto.",
+    "subtitle": "Para founders que necesitan un socio técnico, no otra agencia.",
+    "cta": "Hablemos",
+    "ctaSecondary": "Cómo Trabajamos",
+    "scroll": "Deslizar"
+  },
+  "howWeWork": {
+    "label": "Cómo Trabajamos",
+    "title1": "No somos agencia",
+    "title2": "Ni freelancer",
+    "subtitle": "Probablemente ya te han fallado antes. Así es como trabajar con nosotros es estructuralmente diferente.",
+    "bottomTagline": "Somos un socio técnico liderado por founders. Mismo equipo desde el día uno hasta la escala.",
+    "headers": {
+      "freelancer": "Freelancer",
+      "agency": "Agencia",
+      "ggit": "GGIT"
+    },
+    "rows": [
+      {
+        "category": "¿Quién construye tu producto?",
+        "freelancer": "Una persona (desaparece a mitad del proyecto)",
+        "agency": "Devs junior que nunca conoces",
+        "ggit": "Founders e ingenieros senior — directamente"
+      },
+      {
+        "category": "Comunicación",
+        "freelancer": "Mensajes asincrónicos, días para responder",
+        "agency": "Account manager transmite tus palabras",
+        "ggit": "Línea directa con quien escribe el código"
+      },
+      {
+        "category": "¿Y si la idea no es buena?",
+        "freelancer": "Construye lo que pidas",
+        "agency": "Construye lo que pagues",
+        "ggit": "Te avisamos antes de que gastes dinero"
+      },
+      {
+        "category": "Zona horaria y disponibilidad",
+        "freelancer": "Su horario, no el tuyo",
+        "agency": "9-5 en su zona horaria",
+        "ggit": "Cobertura AU + BR — progreso mientras duermes"
+      },
+      {
+        "category": "Entrega acelerada por IA",
+        "freelancer": "Quizás usa Copilot",
+        "agency": "Flujos de trabajo tradicionales",
+        "ggit": "Proceso nativo de IA: más rápido, ágil y económico"
+      },
+      {
+        "category": "¿Después del lanzamiento?",
+        "freelancer": "Se fue. Buena suerte.",
+        "agency": "Nuevo contrato, nuevo equipo",
+        "ggit": "Mismo equipo escala contigo"
+      }
+    ]
+  },
+  "services": {
+    "label": "Qué Hacemos",
+    "title": "Tu etapa",
+    "titleEnd": "tu solución",
+    "subtitle": "No vendemos horas ni headcount. Te encontramos donde estás y entregamos lo que tu negocio realmente necesita ahora.",
+    "items": [
+      {
+        "title": "Discovery y Estrategia",
+        "subtitle": "Tienes una idea — la hacemos construible",
+        "description": "Sabes el problema que quieres resolver pero no cómo construirlo. Definimos el alcance del MVP, recomendamos el stack correcto, estimamos costos y entregamos un roadmap claro para tu equipo (o inversores).",
+        "deliverables": ["Definición de Alcance MVP", "Recomendación de Stack", "Estimación de Costo y Plazo", "Roadmap para Inversores"]
+      },
+      {
+        "title": "Construcción de MVP",
+        "subtitle": "De cero a producto funcionando — rápido",
+        "description": "Construimos tu primer producto en semanas, no meses. No-code, low-code o custom — lo que te lleve al mercado más rápido. Recibes un producto real para mostrar a usuarios e inversores.",
+        "deliverables": ["Producto Funcionando", "Listo para Pruebas", "Deploy y Hosting", "Soporte de Iteraciones"]
+      },
+      {
+        "title": "CTO Fraccional",
+        "subtitle": "Liderazgo técnico sin el costo full-time",
+        "description": "Asociación estratégica continua. Tomamos decisiones de arquitectura, supervisamos el desarrollo, gestionamos tu equipo de devs y traducimos tech en lenguaje de negocios para tus stakeholders.",
+        "deliverables": ["Decisiones de Arquitectura", "Supervisión del Equipo Dev", "Planificación de Sprints", "Comunicación con Inversores"]
+      },
+      {
+        "title": "Escalar y Migrar",
+        "subtitle": "Tu MVP funcionó — ahora que aguante el crecimiento",
+        "description": "Cuando tu producto supera su arquitectura inicial, re-ingeniamos para escala. Migramos de no-code a custom, optimizamos rendimiento y construimos infraestructura que aguante tráfico real.",
+        "deliverables": ["Migración No-Code a Custom", "Optimización de Rendimiento", "Infraestructura Cloud", "Integración de IA y Automatización"]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Descubramos tu próximo paso",
+    "subtitle": "Agenda una llamada gratuita de 30 minutos. Sin pitch, sin presión — solo una conversación honesta sobre lo que tu startup necesita ahora.",
+    "button": "Agendar Discovery Call"
+  },
+  "footer": {
+    "description": "Tú te enfocas en el negocio. Nosotros construimos el producto. Un socio técnico liderado por founders conectando Australia y Brasil.",
+    "servicesTitle": "Servicios",
+    "contactTitle": "Contacto",
+    "rights": "GGIT Systems. Todos los derechos reservados.",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio"
+  },
+  "nav": {
+    "howWeWork": "Cómo Trabajamos",
+    "services": "Servicios",
+    "contact": "Contacto",
+    "letsTalk": "Hablemos",
+    "startProject": "Iniciar Proyecto"
+  },
+  "cookie": {
+    "title": "Tu privacidad importa",
+    "description": "Usamos cookies para mejorar tu experiencia de navegación, analizar tráfico y personalizar contenido. Puedes aceptar o rechazar cookies no esenciales.",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
+  }
+}

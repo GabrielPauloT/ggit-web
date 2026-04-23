@@ -1,81 +1,139 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { MessageCircle, Zap, Users } from 'lucide-react'
-
-const advantages = [
-  {
-    icon: MessageCircle,
-    title: 'Talk to builders, not salespeople',
-    description: 'From initial scope to production deploy, you deal directly with founders and engineers. No middlemen.',
-  },
-  {
-    icon: Zap,
-    title: 'Fast feedback loops',
-    description: 'Weekly demos, async updates, and a direct line to the team. You always know where your project stands.',
-  },
-  {
-    icon: Users,
-    title: 'Small team, big ownership',
-    description: 'Every engineer on your project understands the full picture. No ticket handoffs, no context switching.',
-  },
-]
+import { X, AlertTriangle, Check, Crown } from 'lucide-react'
+import { useLanguage } from '@/components/providers/LanguageProvider'
 
 export default function DirectContact() {
+  const { t } = useLanguage()
+  const rows = t.howWeWork.rows
+
   return (
     <section id="how-we-work" className="py-32 relative overflow-hidden">
       <div className="section-glow absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-brand-cyan/[0.03] rounded-full blur-[120px]" />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-10 h-[1px] bg-brand-cyan" />
-              <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">How We Work</h2>
-            </div>
-            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-              Less noise<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">,</span><br />
-              more delivery<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
-            </h3>
-            <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-light mb-4">
-              The #1 frustration in hiring a dev agency? The telephone game. You brief a PM, who briefs a lead, who briefs a developer — and by the time code gets written, the original vision is lost.
-            </p>
-            <p className="text-gray-400 text-base sm:text-lg leading-relaxed font-light">
-              At GGIT, you talk directly to the people who build your product. From scoping to deployment, your line is always open to the engineers and founders making decisions.
-            </p>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <div className="flex items-center gap-2 justify-center mb-4">
+            <span className="w-10 h-[1px] bg-brand-cyan" />
+            <h2 className="text-sm font-mono text-brand-cyan tracking-widest uppercase">{t.howWeWork.label}</h2>
+            <span className="w-10 h-[1px] bg-brand-cyan" />
+          </div>
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+            {t.howWeWork.title1}<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span> {t.howWeWork.title2}<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-cyan">.</span>
+          </h3>
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-light">
+            {t.howWeWork.subtitle}
+          </p>
+        </motion.div>
 
-          <div className="space-y-6">
-            {advantages.map((item, index) => (
-              <motion.div
+        {/* Comparison Table - Desktop */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8 }}
+          className="hidden md:block"
+        >
+          <div className="bg-white/[0.02] border border-white/[0.05] rounded-3xl overflow-hidden">
+            <div className="grid grid-cols-4 border-b border-white/[0.08]">
+              <div className="p-6" />
+              <div className="p-6 text-center border-l border-white/[0.05]">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <AlertTriangle className="w-4 h-4 text-red-400/70" />
+                  <span className="text-gray-400 font-semibold text-sm">{t.howWeWork.headers.freelancer}</span>
+                </div>
+              </div>
+              <div className="p-6 text-center border-l border-white/[0.05]">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <AlertTriangle className="w-4 h-4 text-yellow-400/70" />
+                  <span className="text-gray-400 font-semibold text-sm">{t.howWeWork.headers.agency}</span>
+                </div>
+              </div>
+              <div className="p-6 text-center border-l border-brand-cyan/20 bg-brand-cyan/[0.03]">
+                <div className="flex items-center justify-center gap-2 mb-1">
+                  <Crown className="w-4 h-4 text-brand-cyan" />
+                  <span className="text-brand-cyan font-semibold text-sm">{t.howWeWork.headers.ggit}</span>
+                </div>
+              </div>
+            </div>
+
+            {rows.map((row, index) => (
+              <div
                 key={index}
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="group p-6 bg-white/[0.02] border border-white/[0.05] hover:border-brand-blue/30 rounded-2xl transition-colors duration-500 flex items-start gap-5 relative overflow-hidden"
+                className={`grid grid-cols-4 ${index < rows.length - 1 ? 'border-b border-white/[0.05]' : ''} group hover:bg-white/[0.01] transition-colors duration-300`}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-blue/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                <div className="p-3 bg-brand-blue/[0.08] border border-brand-blue/20 rounded-xl flex-shrink-0 group-hover:bg-brand-blue/15 group-hover:border-brand-blue/40 transition-colors duration-500 relative z-10">
-                  <item.icon className="w-6 h-6 text-brand-blue group-hover:text-brand-cyan transition-colors duration-500" />
+                <div className="p-5 flex items-center">
+                  <span className="text-white text-sm font-medium">{row.category}</span>
                 </div>
-                <div className="relative z-10">
-                  <h4 className="text-lg font-semibold text-white mb-2 group-hover:text-brand-cyan transition-colors duration-300">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-400 text-sm leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-500">
-                    {item.description}
-                  </p>
+                <div className="p-5 flex items-center border-l border-white/[0.05]">
+                  <div className="flex items-start gap-2">
+                    <X className="w-4 h-4 text-red-400/60 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-500 text-sm">{row.freelancer}</span>
+                  </div>
                 </div>
-              </motion.div>
+                <div className="p-5 flex items-center border-l border-white/[0.05]">
+                  <div className="flex items-start gap-2">
+                    <X className="w-4 h-4 text-yellow-400/60 mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-500 text-sm">{row.agency}</span>
+                  </div>
+                </div>
+                <div className="p-5 flex items-center border-l border-brand-cyan/20 bg-brand-cyan/[0.02]">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-brand-cyan mt-0.5 flex-shrink-0" />
+                    <span className="text-gray-300 text-sm font-medium">{row.ggit}</span>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Comparison Cards - Mobile */}
+        <div className="md:hidden space-y-4">
+          {rows.map((row, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ delay: index * 0.08, duration: 0.5 }}
+              className="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-5"
+            >
+              <p className="text-white text-sm font-semibold mb-3">{row.category}</p>
+              <div className="space-y-2.5">
+                <div className="flex items-start gap-2">
+                  <X className="w-3.5 h-3.5 text-red-400/60 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-500 text-xs"><span className="text-gray-600 font-medium">{t.howWeWork.headers.freelancer}:</span> {row.freelancer}</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <X className="w-3.5 h-3.5 text-yellow-400/60 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-500 text-xs"><span className="text-gray-600 font-medium">{t.howWeWork.headers.agency}:</span> {row.agency}</span>
+                </div>
+                <div className="flex items-start gap-2 pt-2 border-t border-white/[0.05]">
+                  <Check className="w-3.5 h-3.5 text-brand-cyan mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-300 text-xs font-medium"><span className="text-brand-cyan">{t.howWeWork.headers.ggit}:</span> {row.ggit}</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="text-center text-gray-500 text-sm mt-10 font-light"
+        >
+          {t.howWeWork.bottomTagline}
+        </motion.p>
       </div>
     </section>
   )

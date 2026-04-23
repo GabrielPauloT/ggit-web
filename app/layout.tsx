@@ -16,10 +16,15 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'GGIT Systems | Digital Solutions',
   description: 'Turning complex challenges into scalable digital solutions.',
+  icons: {
+    icon: '/ggit-icon.png',
+    apple: '/ggit-icon.png',
+  },
 }
 
 import ReturnToTop from '@/components/ui/ReturnToTop'
 import CookieBanner from '@/components/ui/CookieBanner'
+import LanguageProvider from '@/components/providers/LanguageProvider'
 
 export default function RootLayout({
   children,
@@ -29,11 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-dark-bg text-foreground min-h-screen relative`}>
-        <SmoothScrolling>
-          {children}
-          <ReturnToTop />
-          <CookieBanner />
-        </SmoothScrolling>
+        <LanguageProvider>
+          <SmoothScrolling>
+            {children}
+            <ReturnToTop />
+            <CookieBanner />
+          </SmoothScrolling>
+        </LanguageProvider>
       </body>
     </html>
   )

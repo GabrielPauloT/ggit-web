@@ -3,8 +3,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/components/providers/LanguageProvider'
+import type { Lang } from '@/lib/i18n'
 
-const languages = [
+const languages: { code: Lang; flag: string }[] = [
   { code: 'EN', flag: '🇬🇧' },
   { code: 'PT', flag: '🇧🇷' },
   { code: 'ES', flag: '🇪🇸' },
@@ -12,16 +14,10 @@ const languages = [
 
 export default function LanguageSelector() {
   const [isOpen, setIsOpen] = useState(false)
-  const [selected, setSelected] = useState(languages[0])
+  const { lang, setLang } = useLanguage()
   const ref = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const saved = localStorage.getItem('lang')
-    if (saved) {
-      const found = languages.find(l => l.code === saved)
-      if (found) setSelected(found)
-    }
-  }, [])
+  const selected = languages.find(l => l.code === lang) || languages[0]
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -33,9 +29,8 @@ export default function LanguageSelector() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleSelect = (lang: typeof languages[0]) => {
-    setSelected(lang)
-    localStorage.setItem('lang', lang.code)
+  const handleSelect = (l: typeof languages[0]) => {
+    setLang(l.code)
     setIsOpen(false)
   }
 
@@ -59,18 +54,18 @@ export default function LanguageSelector() {
             transition={{ duration: 0.15 }}
             className="absolute top-full right-0 mt-3 bg-[#111] border border-white/[0.08] rounded-xl overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.6)] min-w-[90px] z-50"
           >
-            {languages.map((lang) => (
+            {languages.map((l) => (
               <button
-                key={lang.code}
-                onClick={() => handleSelect(lang)}
+                key={l.code}
+                onClick={() => handleSelect(l)}
                 className={`w-full flex items-center gap-2.5 px-3.5 py-2.5 text-left cursor-pointer transition-colors duration-200 ${
-                  selected.code === lang.code
+                  lang === l.code
                     ? 'text-brand-cyan bg-brand-cyan/[0.06]'
                     : 'text-gray-500 hover:text-white hover:bg-white/[0.04]'
                 }`}
               >
-                <span className="text-sm leading-none">{lang.flag}</span>
-                <span className="text-xs font-mono tracking-wide">{lang.code}</span>
+                <span className="text-sm leading-none">{l.flag}</span>
+                <span className="text-xs font-mono tracking-wide">{l.code}</span>
               </button>
             ))}
           </motion.div>
